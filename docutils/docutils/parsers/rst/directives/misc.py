@@ -11,7 +11,7 @@ import os.path
 import re
 import time
 from docutils import io, nodes, statemachine, utils
-from docutils.utils.error_reporting import SafeString, ErrorString
+from docutils.utils.error_reporting import ErrorString
 from docutils.utils.error_reporting import locale_encoding
 from docutils.parsers.rst import Directive, convert_directive_function
 from docutils.parsers.rst import directives, roles, states
@@ -81,7 +81,7 @@ class Include(Directive):
             raise self.severe(u'Problems with "%s" directive path:\n'
                               'Cannot encode input file path "%s" '
                               '(wrong locale?).' %
-                              (self.name, SafeString(path)))
+                              (self.name, path))
         except IOError as error:
             raise self.severe(u'Problems with "%s" directive path:\n%s.' %
                       (self.name, ErrorString(error)))
@@ -460,7 +460,7 @@ class Role(Directive):
             except ValueError as detail:
                 error = self.state_machine.reporter.error(
                     u'Invalid argument for "%s" directive:\n%s.'
-                    % (self.name, SafeString(detail)), nodes.literal_block(
+                    % (self.name, detail), nodes.literal_block(
                     self.block_text, self.block_text), line=self.lineno)
                 return messages + [error]
         role = roles.CustomRole(new_role_name, base_role, options, content)

@@ -19,10 +19,8 @@ Docutils 1.2.
 Error reporting should be safe from encoding/decoding errors.
 However, implicit conversions of strings and exceptions like
 
->>> u'%s world: %s' % ('H\xe4llo', Exception(u'H\xe4llo')
+>>> u'%s world: %s' % ('H\xe4llo', Exception(u'H\xe4llo'))
 
-The `SafeString`, `ErrorString` and `ErrorOutput` classes handle
-common exceptions.
 """
 
 import codecs

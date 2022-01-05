@@ -26,7 +26,6 @@ except ImportError:
 
 import docutils
 from docutils import frontend, nodes, languages, writers, utils
-from docutils.utils.error_reporting import SafeString
 from docutils.transforms import writer_aux
 from docutils.utils.math import pick_math_environment, unichar2tex
 
@@ -1397,7 +1396,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
                 self.settings.record_dependencies.add(path)
             except IOError as err:
                 msg = u'Cannot embed stylesheet %r:\n  %s.' % (
-                                path, SafeString(err.strerror))
+                                path, err.strerror)
                 self.document.reporter.error(msg)
                 return '% ' + msg.replace('\n', '\n% ')
             if is_package:

@@ -41,8 +41,8 @@ import warnings
 import docutils
 import docutils.utils
 import docutils.nodes
-from docutils.utils.error_reporting import (locale_encoding, SafeString,
-                                            ErrorOutput, ErrorString)
+from docutils.utils.error_reporting import (locale_encoding, ErrorOutput,
+                                            ErrorString)
 
 
 def store_multiple(option, opt, value, parser, *args, **kwargs):
@@ -608,7 +608,7 @@ class OptionParser(optparse.OptionParser, docutils.SettingsSpec):
             try:
                 config_settings = self.get_standard_config_settings()
             except ValueError as error:
-                self.error(SafeString(error))
+                self.error(error)
             self.set_defaults_from_dict(config_settings.__dict__)
 
     def populate_from_components(self, components):

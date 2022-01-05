@@ -19,7 +19,7 @@ from docutils import ApplicationError, DataError, __version_info__
 from docutils import nodes
 from docutils.nodes import unescape
 import docutils.io
-from docutils.utils.error_reporting import ErrorOutput, SafeString
+from docutils.utils.error_reporting import ErrorOutput
 
 
 class SystemMessage(ApplicationError):
@@ -158,7 +158,7 @@ class Reporter(object):
         """
         # `message` can be a `str` or `Exception` instance.
         if isinstance(message, Exception):
-            message = SafeString(message)
+            message = str(message)
 
         attributes = kwargs.copy()
         if 'base_node' in kwargs:
