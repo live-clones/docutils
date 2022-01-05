@@ -13,26 +13,13 @@
 """
 Provisional module to handle Exceptions across Python versions.
 
-This module will be deprecated with the end of support for Python 2.7
-and be removed in Docutils 1.2.
+This module is deprecated in Docutils 0.19.1 and will be removed in
+Docutils 1.2.
 
 Error reporting should be safe from encoding/decoding errors.
 However, implicit conversions of strings and exceptions like
 
 >>> u'%s world: %s' % ('H\xe4llo', Exception(u'H\xe4llo')
-
-fail in some Python versions:
-
-* In Python <= 2.6, ``unicode(<exception instance>)`` uses
-  `__str__` and fails with non-ASCII chars in`unicode` arguments.
-  (work around http://bugs.python.org/issue2517):
-
-* In Python 2, unicode(<exception instance>) fails, with non-ASCII
-  chars in arguments. (Use case: in some locales, the errstr
-  argument of IOError contains non-ASCII chars.)
-
-* In Python 2, str(<exception instance>) fails, with non-ASCII chars
-  in `unicode` arguments.
 
 The `SafeString`, `ErrorString` and `ErrorOutput` classes handle
 common exceptions.
@@ -68,8 +55,7 @@ else:
         locale_encoding = None
 
 
-if sys.version_info >= (3, 0):
-    unicode = str  # noqa
+unicode = str  # noqa
 
 
 class SafeString(object):
@@ -96,11 +82,7 @@ class SafeString(object):
                         for arg in self.data.args]
                 return ', '.join(args)
             if isinstance(self.data, unicode):
-                if sys.version_info > (3, 0):
-                    return self.data
-                else:
-                    return self.data.encode(self.encoding,
-                                            self.encoding_errors)
+                return self.data
             raise
 
     def __unicode__(self):

@@ -35,8 +35,8 @@ import unicodedata
    Docutils run. See there for motives and implementation details.
 
    The category of some characters changed with the development of the
-   Unicode standard. The current lists are generated with the help of the
-   "unicodedata" module of Python 2.7.13 (based on Unicode version 5.2.0).
+   Unicode standard. The current lists are generated with the help of
+   Python's "unicodedata" module (based on Unicode version 5.2.0).
 
    .. _inline markup recognition rules:
       http://docutils.sf.net/docs/ref/rst/restructuredtext.html#inline-markup-recognition-rules

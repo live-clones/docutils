@@ -30,9 +30,8 @@ import warnings
 import unicodedata
 # import xml.dom.minidom as dom # -> conditional import in Node.asdom()
 
-if sys.version_info >= (3, 0):
-    unicode = str  # noqa
-    basestring = str  # noqa
+unicode = str  # noqa
+basestring = str  # noqa
 
 
 # ==============================
