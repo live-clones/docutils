@@ -27,6 +27,7 @@ common exceptions.
 
 import codecs
 import sys
+import warnings
 
 # Guess the locale's encoding.
 # If no valid guess can be made, locale_encoding is set to `None`:
@@ -55,43 +56,24 @@ else:
         locale_encoding = None
 
 
-
-
-class SafeString(object):
+def SafeString(data, encoding=None, encoding_errors="", decoding_errors=""):
     """
     A wrapper providing robust conversion to `str`.
     """
-
-    def __init__(self, data, encoding=None, encoding_errors='backslashreplace',
-                 decoding_errors='replace'):
-        self.data = data
-        self.encoding = (encoding or getattr(data, 'encoding', None) or
-                         locale_encoding or 'ascii')
-        self.encoding_errors = encoding_errors
-        self.decoding_errors = decoding_errors
+    warnings.warn("error_reporting.SafeString() is not required with Python 3"
+                  " and will be removed in Docutils 1.2.",
+                  DeprecationWarning, stacklevel=2)
+    return str(data)
 
 
-    def __str__(self):
-        try:
-            return str(self.data)
-        except UnicodeEncodeError:
-            if isinstance(self.data, Exception):
-                args = [str(SafeString(arg, self.encoding,
-                                        self.encoding_errors))
-                        for arg in self.data.args]
-                return ', '.join(args)
-            if isinstance(self.data, str):
-                return self.data
-            raise
-
-
-class ErrorString(SafeString):
+def ErrorString(data):
     """
     Safely report exception type and message.
     """
-    def __str__(self):
-        return '%s: %s' % (self.data.__class__.__name__,
-                            super(ErrorString, self).__str__())
+    warnings.warn("error_reporting.ErrorString() is not required with Python 3"
+                  " and will be removed in Docutils 1.2.",
+                  DeprecationWarning, stacklevel=2)
+    return f"{data.__class__.__name__}: {data}"
 
 
 class ErrorOutput(object):
@@ -115,11 +97,11 @@ class ErrorOutput(object):
         """
         if stream is None:
             stream = sys.stderr
-        elif not(stream):
+        elif not stream:
             stream = False
         # if `stream` is a file name, open it
         elif isinstance(stream, str):
-            stream = open(stream, 'w')
+            stream = open(stream, "w")
 
         self.stream = stream
         """Where warning output is sent."""
@@ -143,8 +125,7 @@ class ErrorOutput(object):
         if self.stream is False:
             return
         if isinstance(data, Exception):
-            data = str(SafeString(data, self.encoding,
-                                  self.encoding_errors, self.decoding_errors))
+            data = str(data)
         try:
             self.stream.write(data)
         except UnicodeEncodeError:

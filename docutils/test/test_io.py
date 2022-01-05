@@ -8,45 +8,46 @@
 Test module for io.py.
 """
 
-import sys
 import unittest
 import warnings
+from io import StringIO, BytesIO
 
 import DocutilsTestSupport              # must be imported before docutils
 from docutils import io
 from docutils.utils.error_reporting import locale_encoding
-from test_error_reporting import BBuf, UBuf
 
-class mock_stdout(UBuf):
-    encoding = 'utf8'
+
+class MockStdout(StringIO):
+    encoding = "utf8"
 
     def __init__(self):
-        self.buffer = BBuf()
-        UBuf.__init__(self)
+        self.buffer = BytesIO()
+        super().__init__()
+
 
 class HelperTests(unittest.TestCase):
 
     def test_check_encoding_true(self):
         """Return `True` if lookup returns the same codec"""
-        self.assertEqual(io.check_encoding(mock_stdout, 'utf8'), True)
-        self.assertEqual(io.check_encoding(mock_stdout, 'utf-8'), True)
-        self.assertEqual(io.check_encoding(mock_stdout, 'UTF-8'), True)
+        self.assertEqual(io.check_encoding(MockStdout, 'utf8'), True)
+        self.assertEqual(io.check_encoding(MockStdout, 'utf-8'), True)
+        self.assertEqual(io.check_encoding(MockStdout, 'UTF-8'), True)
 
     def test_check_encoding_false(self):
         """Return `False` if lookup returns different codecs"""
-        self.assertEqual(io.check_encoding(mock_stdout, 'ascii'), False)
-        self.assertEqual(io.check_encoding(mock_stdout, 'latin-1'), False)
+        self.assertEqual(io.check_encoding(MockStdout, 'ascii'), False)
+        self.assertEqual(io.check_encoding(MockStdout, 'latin-1'), False)
 
     def test_check_encoding_none(self):
         """Cases where the comparison fails."""
         # stream.encoding is None:
         self.assertEqual(io.check_encoding(io.FileInput(), 'ascii'), None)
         # stream.encoding does not exist:
-        self.assertEqual(io.check_encoding(BBuf, 'ascii'), None)
+        self.assertEqual(io.check_encoding(BytesIO, 'ascii'), None)
         # encoding is None:
-        self.assertEqual(io.check_encoding(mock_stdout, None), None)
+        self.assertEqual(io.check_encoding(MockStdout, None), None)
         # encoding is invalid
-        self.assertEqual(io.check_encoding(mock_stdout, 'UTF-9'), None)
+        self.assertEqual(io.check_encoding(MockStdout, 'UTF-9'), None)
 
 
 class InputTests(unittest.TestCase):
@@ -134,11 +135,11 @@ class OutputTests(unittest.TestCase):
     udata = u'\xfc'
 
     def setUp(self):
-        self.bdrain = BBuf()
+        self.bdrain = BytesIO()
         """Buffer accepting binary strings (bytes)"""
-        self.udrain = UBuf()
+        self.udrain = StringIO()
         """Buffer accepting unicode strings"""
-        self.mock_stdout = mock_stdout()
+        self.mock_stdout = MockStdout()
         """Stub of sys.stdout under Python 3"""
 
     def test_write_unicode(self):
