@@ -766,7 +766,7 @@ Skipping "%s" configuration file.
         self._files = []
         """List of paths of configuration files read."""
 
-        self._stderr = ErrorOutput()
+        self._stderr = sys.stderr
         """Wrapper around sys.stderr catching en-/decoding errors"""
 
     def read(self, filenames, option_parser):

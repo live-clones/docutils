@@ -75,7 +75,7 @@ class Publisher(object):
         """An object containing Docutils settings as instance attributes.
         Set by `self.process_command_line()` or `self.get_settings()`."""
 
-        self._stderr = ErrorOutput()
+        self._stderr = sys.stderr
 
     def set_reader(self, reader_name, parser, parser_name):
         """Set `self.reader` by name."""

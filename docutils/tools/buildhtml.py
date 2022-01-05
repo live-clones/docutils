@@ -230,7 +230,7 @@ class Builder(object):
 
     def visit(self, directory, names, subdirectories):
         settings = self.get_settings('', directory)
-        errout = ErrorOutput(encoding=settings.error_encoding)
+        errout = sys.stderr
         if settings.prune and (os.path.abspath(directory) in settings.prune):
             errout.write('/// ...Skipping directory (pruned): %s\n' %
                          directory)
@@ -257,7 +257,7 @@ class Builder(object):
         else:
             publisher = self.initial_settings.writer
         settings = self.get_settings(publisher, directory)
-        errout = ErrorOutput(encoding=settings.error_encoding)
+        errout = sys.stderr
         pub_struct = self.publishers[publisher]
         settings._source = os.path.normpath(os.path.join(directory, name))
         settings._destination = settings._source[:-4]+'.html'

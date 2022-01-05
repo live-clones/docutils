@@ -171,8 +171,7 @@ class StateMachine(object):
         line changes.  Observers are called with one argument, ``self``.
         Cleared at the end of `run()`."""
 
-        self._stderr = ErrorOutput()
-        """Wrapper around sys.stderr catching en-/decoding errors"""
+        self._stderr = sys.stderr
 
 
     def unlink(self):

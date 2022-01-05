@@ -93,6 +93,9 @@ class ErrorOutput(object):
             - `encoding`: `stream` text encoding. Guessed if None.
             - `encoding_errors`: how to treat encoding errors.
         """
+        warnings.warn("error_reporting.ErrorOutput() is not required with "
+                      "Python 3 and will be removed in Docutils 1.2.",
+                      DeprecationWarning, stacklevel=2)
         if stream is None:
             stream = sys.stderr
         elif not stream:
