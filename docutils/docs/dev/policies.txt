@@ -481,43 +481,6 @@ Policy History
   __ https://sourceforge.net/p/docutils/mailman/message/35903816/
 
 
-Backwards Compatibility Policy
-==============================
-
-.. note:: The backwards compatibility policy outlined below is a stub.
-
-Docutils' backwards compatibility policy follows the rules for Python in
-:PEP:`387`.
-
-* The scope of the public API is laid out at the start of the `backwards
-  compatibility rules`_.
-
-* The rules for `making incompatible changes`_ apply.
-
-A majority of projects depends on Docutils indirectly, via the Sphinx_
-document processor.
-
-* Sphinx developers should be given the chance to fix or work around a
-  DeprecationWarning_ in the Sphinx development version before a new
-  Docutils version is released. Otherwise, use a PendingDeprecationWarning_.
-
-Changes that may affect end-users (e.g. by requiring changes to the
-configuration file or potentially breaking custom style sheets) should be
-announced with a FutureWarning_.
-
-.. _backwards compatibility rules:
-   https://www.python.org/dev/peps/pep-0387/#backwards-compatibility-rules
-.. _making incompatible changes:
-   https://www.python.org/dev/peps/pep-0387/#making-incompatible-changes
-.. _Sphinx: https://www.sphinx-doc.org/
-.. _DeprecationWarning:
-   https://docs.python.org/3/library/exceptions.html#DeprecationWarning
-.. _PendingDeprecationWarning:
-   https://docs.python.org/3/library/exceptions.html#PendingDeprecationWarning
-.. _FutureWarning:
-   https://docs.python.org/3/library/exceptions.html#FutureWarning
-
-
 Snapshots
 =========
 
