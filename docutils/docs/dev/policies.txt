@@ -508,6 +508,87 @@ snapshot" button in the head of the code listing table).
    https://sourceforge.net/p/docutils/code/HEAD/tree/branches/
 
 
+Public API and Backwards Compatibility
+======================================
+
+The Docutils project is made up of the `reStructuredText specification`_,
+a suite of `front-end tools`_, and the ``docutils`` Python library itself.
+This document defines the backwards compatability policy and "public API" for
+the Docutils project.
+
+Docutils has a large user base and a wide range of use cases. Clearly defining
+how we will balance evolution with stability is important to both users and
+project developers.
+
+Users of the Docutils project include:
+
+.. Specification
+
+#. Authors writing reStructuredText documents, who implicitly rely on the
+   `reStructuredText specification`_.
+
+#. Re-implementers of the `reStructuredText specification`_, such as PanDoc_.
+
+.. Front-end
+
+#. Users of the `front-end tools`_
+
+.. Library (programmatic API)
+
+#. Users of downstream tools that use Docutils as a library, for example
+   Sphinx_.
+
+#. Users of tools that provide additional components for Docutils, for example
+   MyST_, PyCMark_, recommonmark_, etc.
+
+#. Developers of tools using Docutils, and developers of Docutils itself.
+
+.. _reStructuredText specification: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html
+.. _PanDoc: https://pandoc.org/
+.. _front-end tools: https://docutils.sourceforge.io/docs/user/tools.html
+.. _Sphinx: https://www.sphinx-doc.org/
+.. _MyST: https://myst-parser.readthedocs.io/
+.. _PyCMark: https://github.com/pycmark/pycmark
+.. _recommonmark: https://recommonmark.readthedocs.io/
+
+Extent of the public API
+------------------------
+
+Docutils public APIs are:
+
+* the `reStructuredText specification`_
+
+* the `front-end tools`_, including the arguments to the tools
+
+* the XML Document Type Definition (DTD)
+
+* the Docutils writer templates
+
+* behaviour and names of all items included in the ``__public__`` attribute of
+  their parent objects. Such items can be modules, classes, module level
+  functions, module level variables, etc.
+
+Python objects and variables can explicitly "opt-out" of the public API with a
+docstring noting that the object is provisional, and subject to change in any
+future release of Docutils.
+
+Where a name is not listed in the ``__public__`` variable, the following rule
+applies:
+
+    Documented interfaces are considered public, unless the documentation
+    explicitly declares them to be provisional or internal interfaces exempt
+    from the usual backwards compatibility guarantees. All undocumented
+    interfaces should be assumed to be internal.
+
+Deprecation periods
+-------------------
+
+Before any element of the public API changes or is removed, the current
+behaviour must have been deprecated for two non-bug-fix releases. In exceptional
+circumstances, a shorter period may be used, as long as no Docutils project
+developer disagrees.
+
+
 Setting Up For Docutils Development
 ===================================
 
