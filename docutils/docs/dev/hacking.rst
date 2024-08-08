@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ==========================
  Docutils_ Hacker's Guide
@@ -77,14 +77,14 @@ tree** representation.  In this case we are using the
     from docutils import frontend, utils
     from docutils.parsers.rst import Parser
     settings = frontend.get_default_settings(Parser)
-    with open('test.txt', encoding='utf-8') as file:
+    with open('test.rst', encoding='utf-8') as file:
         document = utils.new_document(file.name, settings)
         Parser().parse(file.read(), document)
 
 Let us now examine the node tree.
 With ``print(document.pformat())`` we get::
 
-    <document source="test.txt">
+    <document source="test.rst">
         <paragraph>
             My
             <emphasis>
@@ -96,7 +96,7 @@ With ``print(document.pformat())`` we get::
         <target ids="python" names="python" refuri="https://www.python.org/">
 
 The top-level node is ``document``.  It has a ``source`` attribute
-whose value is ``text.txt``.  There are two children: A ``paragraph``
+whose value is ``text.rst``.  There are two children: A ``paragraph``
 node and a ``target`` node.  The ``paragraph`` in turn has children: A
 text node ("My "), an ``emphasis`` node, a text node (" language is "),
 a ``reference`` node, and again a ``Text`` node (".").
@@ -134,8 +134,8 @@ The Transforms are applied after parsing.  To see how the node tree
 has changed after applying the Transforms, we use the
 rst2pseudoxml_ tool [#]_::
 
-    $ rst2pseudoxml test.txt
-    <document source="test.txt">
+    $ rst2pseudoxml test.rst
+    <document source="test.rst">
         <paragraph>
             My
             <emphasis>
@@ -174,7 +174,7 @@ HTML writer in this case (``docutils/writers/html4css1.py``).
 The writer receives the node tree and returns the output document.
 For HTML output, we can test this using the ``rst2html`` tool::
 
-    $ rst2html --link-stylesheet test.txt
+    $ rst2html --link-stylesheet test.rst
     <?xml version="1.0" encoding="utf-8" ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -230,7 +230,7 @@ To retrieve the document tree, call::
 Please see the docstring of publish_doctree for a list of parameters.
 
 .. XXX Need to write a well-readable list of (commonly used) options
-   of the publish_* functions.  Probably in api/publisher.txt.
+   of the publish_* functions.  Probably in api/publisher.rst.
 
 ``document`` is the root node of the document tree.  You can now
 change the document by accessing the ``document`` node and its

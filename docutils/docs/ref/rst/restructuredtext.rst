@@ -1,4 +1,4 @@
-.. include:: ../../header2.txt
+.. include:: ../../header2.rst
 
 =======================================
  reStructuredText Markup Specification
@@ -45,7 +45,7 @@ in the `Syntax Details`_ section.
 `Literal blocks`_ (in which no markup processing is done) are used for
 examples throughout this document, to illustrate the plaintext markup.
 
-__ restructuredtext.txt
+__ restructuredtext.rst
 
 .. contents::
 
@@ -2572,7 +2572,7 @@ following terms are recognized as containing inline markup strings:
 
 No escaping is required inside the following inline markup examples:
 
-- ``*2 * x  *a **b *.txt*`` (breaks rule 2; renders as "*2 * x  *a **b *.txt*")
+- ``*2 * x  *a **b *.rst*`` (breaks rule 2; renders as "*2 * x  *a **b *.rst*")
 - ``*2*x a**b O(N**2) e**(x*y) f(x)*f(y) a*(1+2)*``
   (breaks rule 7; renders as "*2*x a**b O(N**2) e**(x*y) f(x)*f(y) a*(1+2)*")
 
@@ -2582,13 +2582,13 @@ especially if they represent code snippets.  It's a judgment call.
 The following terms *do* require either literal-quoting or escaping to avoid
 misinterpretation::
 
-    *4, class_, *args, **kwargs, `TeX-quoted', *ML, *.txt
+    *4, class_, *args, **kwargs, `TeX-quoted', *ML, *.rst
 
 In most use cases, `inline literals`_ or `literal blocks`_ are the best
 choice (by default, this also selects a monospaced font). Alternatively, the
 inline markup characters can be escaped::
 
-    \*4, class\_, \*args, \**kwargs, \`TeX-quoted', \*ML, \*.txt
+    \*4, class\_, \*args, \**kwargs, \`TeX-quoted', \*ML, \*.rst
 
 
 For languages that don't use whitespace between words (e.g. Japanese or
@@ -2884,9 +2884,9 @@ If a target URI that is not recognized as `standalone hyperlink`_ happens
 to end with an underscore, this needs to be backslash-escaped to avoid
 being parsed as hyperlink reference. For example ::
 
-    Use the `source <parrots.txt\_>`__.
+    Use the `source <parrots.rst\_>`__.
 
-creates an anonymous reference to the file ``parrots.txt_``.
+creates an anonymous reference to the file ``parrots.rst_``.
 
 If the reference text happens to end with angle-bracketed text that is
 *not* a URI or hyperlink reference, at least one angle-bracket needs to

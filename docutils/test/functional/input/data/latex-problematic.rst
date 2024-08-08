@@ -5,7 +5,7 @@ These tests contain unusual combinations of syntax elements which may cause
 trouble for the LaTeX writer but do not need to be tested with other writers
 (e.g. the HTML writer).
 
-The file `latex-problematic.txt` contains the cases with non unsatisfying
+The file `latex-problematic.rst` contains the cases with non unsatisfying
 results. It is only used to control the visual appearance of the output, not
 by any automated test
 

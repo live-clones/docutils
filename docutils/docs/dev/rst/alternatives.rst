@@ -1,4 +1,4 @@
-.. include:: ../../header2.txt
+.. include:: ../../header2.rst
 
 ==================================================
  A Record of reStructuredText Syntax Alternatives
@@ -51,7 +51,7 @@ Field Lists
 Prior to the syntax for field lists being finalized, several
 alternatives were proposed.
 
-1. Unadorned RFC822_ everywhere::
+1. Unadorned :RFC:`822` everywhere::
 
        Author: Me
        Version: 1
@@ -61,7 +61,7 @@ alternatives were proposed.
 
    Conclusion: rejected.
 
-2. Special case: use unadorned RFC822_ for the very first or very last
+2. Special case: use unadorned :RFC:`822` for the very first or very last
    text block of a document::
 
        """
@@ -155,8 +155,6 @@ reStructuredText-specific markup convention.  Other syntaxes may
 implement the bibliographic elements explicitly.  For example, there
 would be no need for such a transformation for an XML-based markup
 syntax.
-
-.. _RFC822: https://www.rfc-editor.org/rfc/rfc822.txt
 
 
 Interpreted Text "Roles"
@@ -3130,7 +3128,7 @@ Add the following directives?
   enabled with an explicit command-line option or config file setting.
   Even then, an interactive prompt may be useful, such as:
 
-      The file.txt document you are processing contains a "system"
+      The file.rst document you are processing contains a "system"
       directive requesting that the ``sudo rm -rf /`` command be
       executed.  Allow it to execute?  (y/N)
 

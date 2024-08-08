@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ==================================================
  Creating reStructuredText Interpreted Text Roles

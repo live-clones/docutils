@@ -1,3 +1,3 @@
-In includes/include5.txt
+In includes/include5.rst
 
-.. include:: more/include6.txt
+.. include:: more/include6.rst

@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ========================
  Docutils Configuration
@@ -550,13 +550,13 @@ Set it to "-" in order to write dependencies to stdout.
 This option is particularly useful in conjunction with programs like
 ``make`` using ``Makefile`` rules like::
 
-  ham.html: ham.txt $(shell cat hamdeps.txt)
-    rst2html --record-dependencies=hamdeps.txt ham.txt > ham.html
+  ham.html: ham.rst $(shell cat hamdeps.rst)
+    rst2html --record-dependencies=hamdeps.rst ham.rst > ham.html
 
 If the filesystem encoding differs from UTF-8, replace the ``cat``
 command with a call to a converter, e.g.::
 
-  $(shell iconv -f utf-8 -t latin1 hamdeps.txt)
+  $(shell iconv -f utf-8 -t latin1 hamdeps.rst)
 
 *Default*: None (disabled).  *Option*: ``--record-dependencies``.
 
@@ -2238,7 +2238,7 @@ Files with matching filename are treated as source documents.
 Values in configuration files overwrite the default and are
 overwritten by the command line option.
 
-*Default*: ``*.rst:*.txt``.  *Option*: ``--rst-sources``.
+*Default*: ``*.rst:*.rst``.  *Option*: ``--rst-sources``.
 
 New in Docutils 0.21.
 

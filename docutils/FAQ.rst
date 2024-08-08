@@ -1,4 +1,4 @@
-.. include:: docs/header0.txt
+.. include:: docs/header0.rst
 
 .. NOTE TO MAINTAINERS: Please add new questions to the end of their
    sections, so section/question numbers remain stable.
@@ -167,7 +167,7 @@ and reinterpretation of the StructuredText_ and Setext_ lightweight
 markup systems.
 
 If you are reading this on the web, you can see for yourself.  `The
-source for this FAQ <FAQ.txt>`_ is written in reStructuredText; open
+source for this FAQ <FAQ.rst>`_ is written in reStructuredText; open
 it in another window and compare them side by side.
 
 `A ReStructuredText Primer`_ and the `Quick reStructuredText`_ user
@@ -840,7 +840,7 @@ classes in the HTML:
       .. role:: rtl
 
 .. _stylesheet: docs/user/config.html#stylesheet
-.. _class: docs/ref/rst/directives.txt#class
+.. _class: docs/ref/rst/directives.rst#class
 
 LaTeX is quite hard to implement (it doesn't support the bidi
 algorithm, so all direction changes - even numbers in RTL text - must
@@ -871,10 +871,10 @@ How can I mark up a TODO list?
 ------------------------------
 
 You may use a field list with class argument and some CSS styling.
-For an example see `Docutils TODO lists`_ and its source todo-lists.txt_.
+For an example see `Docutils TODO lists`_ and its source todo-lists.rst_.
 
 .. _Docutils TODO lists: docs/user/todo-lists.html
-.. _todo-lists.txt: docs/user/todo-lists.txt
+.. _todo-lists.rst: docs/user/todo-lists.rst
 
 
 How can I specify an image grid?

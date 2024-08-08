@@ -1,13 +1,13 @@
-.. include:: data/standard.txt
-.. include:: data/header_footer.txt
-.. include:: data/table_colspan.txt
-.. include:: data/table_rowspan.txt
-.. include:: data/table_complex.txt
-.. include:: data/list_table.txt
-.. include:: data/custom_roles.txt
-.. include:: data/svg_images.txt
-.. include:: data/swf_images.txt
-.. include:: data/errors.txt
+.. include:: data/standard.rst
+.. include:: data/header_footer.rst
+.. include:: data/table_colspan.rst
+.. include:: data/table_rowspan.rst
+.. include:: data/table_complex.rst
+.. include:: data/list_table.rst
+.. include:: data/custom_roles.rst
+.. include:: data/svg_images.rst
+.. include:: data/swf_images.rst
+.. include:: data/errors.rst
 
 .. footer:: |valid-xhtml10| |valid-CSS2|
 

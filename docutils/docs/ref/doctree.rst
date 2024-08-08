@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ============================
  The Docutils Document Tree
@@ -1464,7 +1464,7 @@ Complete pseudo-XML_ result after parsing and applying transforms_::
                     Filename
                 <field_body>
                     <paragraph>
-                        doctree.txt
+                        doctree.rst
             <copyright>
                 This document has been placed in the public domain.
 

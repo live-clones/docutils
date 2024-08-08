@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ===================
  Docutils_ Testing
@@ -58,7 +58,7 @@ Testing across multiple Python versions
 ---------------------------------------
 
 A Docutils release has a commitment to support a minimum Python version
-and beyond (see dependencies__ in README.txt). Before a release is cut,
+and beyond (see dependencies__ in README.rst). Before a release is cut,
 tests must pass in all `supported versions`_. [#]_
 
 __ ../../README.html#dependencies
@@ -208,7 +208,7 @@ Directory Structure
 
   + ``input/`` The input files.
 
-    - ``some_test.txt``, for example.
+    - ``some_test.rst``, for example.
 
   + ``output/`` The actual output.
 
@@ -234,7 +234,7 @@ always Docutils' main test directory (``test/``).
 For example, ``functional/tests/some_test.py`` could read like this::
 
     # Source and destination file names.
-    test_source = "some_test.txt"
+    test_source = "some_test.rst"
     test_destination = "some_test.html"
 
     # Keyword parameters passed to publish_file.

@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ==========================
  Docutils Front-End Tools
@@ -101,11 +101,11 @@ The generic front end allows combining "reader", "parser", and
 For example, to process a Markdown_ file "``test.md``" into
 Pseudo-XML_::
 
-    docutils --parser=markdown --writer=pseudoxml test.md > test.txt
+    docutils --parser=markdown --writer=pseudoxml test.md > test.rst
 
 Another example is converting a reStructuredText PEP_ source into a HTML preview [#]_::
 
-    docutils --reader=pep --writer=pep_html pep-0287.txt > pep-0287.html
+    docutils --reader=pep --writer=pep_html pep-0287.rst > pep-0287.html
 
 The pep_html_ writer makes use of a "``pep-html-template``" file and
 the "``pep.css``" stylesheet (both in the ``docutils/writers/pep_html/``
@@ -167,16 +167,16 @@ A CSS stylesheet is required for proper rendering; a simple but
 complete stylesheet is installed and used by default (see Stylesheets_
 below).
 
-For example, to process a reStructuredText file "``test.txt``" into
+For example, to process a reStructuredText file "``test.rst``" into
 HTML::
 
-    rst2html test.txt > test.html
+    rst2html test.rst > test.html
 
 Now open the "``test.html``" file in your favourite browser to see the
 results.  To get a footer with a link to the source file, date & time
 of processing, and links to the Docutils project, add some options::
 
-    rst2html --source-link --time --generator test.txt > test.html
+    rst2html --source-link --time --generator test.rst > test.html
 
 
 Stylesheets
@@ -236,10 +236,10 @@ Standards-based Slide Show System" by Eric Meyer.  A theme is required
 for proper rendering; several are distributed with Docutils and others
 are available; see Themes_ below.
 
-For example, to process a reStructuredText file "``slides.txt``" into
+For example, to process a reStructuredText file "``slides.rst``" into
 S5/HTML::
 
-    rst2s5 slides.txt --output=slides.html
+    rst2s5 slides.rst --output=slides.html
 
 Now open the "``slides.html``" file in your favourite browser, switch
 to full-screen mode, and enjoy the results.
@@ -258,7 +258,7 @@ using the "``--theme``" option (for themes that come with Docutils) or
 the "``--theme-url``" option (for themes anywhere).  For example, the
 "medium-black" theme can be specified as follows::
 
-    rst2s5 --theme medium-black slides.txt --output=slides.html
+    rst2s5 --theme medium-black slides.rst --output=slides.html
 
 The theme will be copied [#copy-theme]_ to the ``ui/medium-black`` directory.
 
@@ -364,7 +364,7 @@ files with::
 
     tools/buildhtml.py
 
-Some files may generate system messages (docs/user/rst/demo.txt contains
+Some files may generate system messages (docs/user/rst/demo.rst contains
 intentional errors); use the ``--quiet`` option to suppress all warnings.
 
 .. [#] The Debian package "python3-docutils" includes the script
@@ -388,9 +388,9 @@ rst2latex
 
 The ``rst2latex`` front end reads standalone reStructuredText
 source files and produces LaTeX_ output. For example, to process a
-reStructuredText file "``test.txt``" into LaTeX::
+reStructuredText file "``test.rst``" into LaTeX::
 
-    rst2latex test.txt > test.tex
+    rst2latex test.rst > test.tex
 
 The output file "``test.tex``" should then be processed with ``latex``
 or ``pdflatex`` to get a document in DVI, PostScript or PDF format for
@@ -414,9 +414,9 @@ rst2xetex
 The ``rst2xetex`` front end reads standalone reStructuredText source
 files and produces `LaTeX` output for processing with Unicode-aware
 TeX engines (`LuaTeX`_ or `XeTeX`_). For example, to process a
-reStructuredText file "``test.txt``" into LaTeX::
+reStructuredText file "``test.rst``" into LaTeX::
 
-    rst2xetex test.txt > test.tex
+    rst2xetex test.rst > test.tex
 
 The output file "``test.tex``" should then be processed with ``xelatex`` or
 ``lualatex`` to get a document in PDF format for printing or on-screen

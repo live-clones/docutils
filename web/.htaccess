@@ -8,7 +8,7 @@ Options Indexes
 # Moved files and directories.
 
 Redirect permanent docs/ref/rst/substitutions.html http://docutils.sourceforge.net/docs/ref/rst/definitions.html
-Redirect permanent docs/ref/rst/substitutions.txt http://docutils.sourceforge.net/docs/ref/rst/definitions.txt
+Redirect permanent docs/ref/rst/substitutions.txt http://docutils.sourceforge.net/docs/ref/rst/definitions.rst
 Redirect permanent /sandbox/leawiemann http://docutils.sourceforge.net/sandbox/wiemann
 Redirect permanent /sandbox/wiemann/xhtml2rest http://docutils.sourceforge.net/sandbox/xhtml2rest
 Redirect permanent /sandbox/ax- http://docutils.sourceforge.net/sandbox/axk
@@ -17,49 +17,49 @@ Redirect permanent /sandbox/dkuhlman/OpenDocument http://docutils.sourceforge.ne
 # Redirection from old URLs to new URLs after a site reorganization.
 
 Redirect permanent /docs/config.html http://docutils.sourceforge.net/docs/user/config.html
-Redirect permanent /docs/config.txt  http://docutils.sourceforge.net/docs/user/config.txt
+Redirect permanent /docs/config.txt  http://docutils.sourceforge.net/docs/user/config.rst
 Redirect permanent /docs/latex.html  http://docutils.sourceforge.net/docs/user/latex.html
-Redirect permanent /docs/latex.txt   http://docutils.sourceforge.net/docs/user/latex.txt
+Redirect permanent /docs/latex.txt   http://docutils.sourceforge.net/docs/user/latex.rst
 Redirect permanent /docs/tools.html  http://docutils.sourceforge.net/docs/user/tools.html
-Redirect permanent /docs/tools.txt   http://docutils.sourceforge.net/docs/user/tools.txt
+Redirect permanent /docs/tools.txt   http://docutils.sourceforge.net/docs/user/tools.rst
 
 Redirect permanent /docs/rst/ http://docutils.sourceforge.net/docs/user/rst/
 
 Redirect permanent /spec/howto/ http://docutils.sourceforge.net/docs/howto/
 
 Redirect permanent /spec/pysource.dtd   http://docutils.sourceforge.net/docs/dev/pysource.dtd
-Redirect permanent /spec/pysource.txt   http://docutils.sourceforge.net/docs/dev/pysource.txt
+Redirect permanent /spec/pysource.txt   http://docutils.sourceforge.net/docs/dev/pysource.rst
 Redirect permanent /spec/pysource.html  http://docutils.sourceforge.net/docs/dev/pysource.html
-Redirect permanent /spec/semantics.txt  http://docutils.sourceforge.net/docs/dev/semantics.txt
+Redirect permanent /spec/semantics.txt  http://docutils.sourceforge.net/docs/dev/semantics.rst
 Redirect permanent /spec/semantics.html http://docutils.sourceforge.net/docs/dev/semantics.html
-Redirect permanent /spec/notes.txt      http://docutils.sourceforge.net/docs/dev/todo.txt
+Redirect permanent /spec/notes.txt      http://docutils.sourceforge.net/docs/dev/todo.rst
 Redirect permanent /spec/notes.html     http://docutils.sourceforge.net/docs/dev/todo.html
 
-Redirect permanent /spec/doctree.txt  http://docutils.sourceforge.net/docs/ref/doctree.txt
+Redirect permanent /spec/doctree.txt  http://docutils.sourceforge.net/docs/ref/doctree.rst
 Redirect permanent /spec/doctree.html http://docutils.sourceforge.net/docs/ref/doctree.html
 Redirect permanent /spec/docutils.dtd http://docutils.sourceforge.net/docs/ref/docutils.dtd
 Redirect permanent /spec/soextblx.dtd http://docutils.sourceforge.net/docs/ref/soextblx.dtd
 
-Redirect permanent /spec/transforms.txt  http://docutils.sourceforge.net/docs/ref/transforms.txt
+Redirect permanent /spec/transforms.txt  http://docutils.sourceforge.net/docs/ref/transforms.rst
 Redirect permanent /spec/transforms.html http://docutils.sourceforge.net/docs/ref/transforms.html
 
-Redirect permanent /spec/rst/alternatives.txt  http://docutils.sourceforge.net/docs/dev/rst/alternatives.txt
+Redirect permanent /spec/rst/alternatives.txt  http://docutils.sourceforge.net/docs/dev/rst/alternatives.rst
 Redirect permanent /spec/rst/alternatives.html http://docutils.sourceforge.net/docs/dev/rst/alternatives.html
-Redirect permanent /spec/rst/problems.txt      http://docutils.sourceforge.net/docs/dev/rst/problems.txt
+Redirect permanent /spec/rst/problems.txt      http://docutils.sourceforge.net/docs/dev/rst/problems.rst
 Redirect permanent /spec/rst/problems.html     http://docutils.sourceforge.net/docs/dev/rst/problems.html
 
-Redirect permanent /spec/rst/reStructuredText.txt  http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.txt
+Redirect permanent /spec/rst/reStructuredText.txt  http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.rst
 Redirect permanent /spec/rst/reStructuredText.html http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
-Redirect permanent /spec/rst/restructuredtext.txt  http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.txt
+Redirect permanent /spec/rst/restructuredtext.txt  http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.rst
 Redirect permanent /spec/rst/restructuredtext.html http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
-Redirect permanent /spec/rst/directives.txt        http://docutils.sourceforge.net/docs/ref/rst/directives.txt
+Redirect permanent /spec/rst/directives.txt        http://docutils.sourceforge.net/docs/ref/rst/directives.rst
 Redirect permanent /spec/rst/directives.html       http://docutils.sourceforge.net/docs/ref/rst/directives.html
-Redirect permanent /spec/rst/interpreted.txt       http://docutils.sourceforge.net/docs/ref/rst/roles.txt
+Redirect permanent /spec/rst/interpreted.txt       http://docutils.sourceforge.net/docs/ref/rst/roles.rst
 Redirect permanent /spec/rst/interpreted.html      http://docutils.sourceforge.net/docs/ref/rst/roles.html
-Redirect permanent /spec/rst/introduction.txt      http://docutils.sourceforge.net/docs/ref/rst/introduction.txt
+Redirect permanent /spec/rst/introduction.txt      http://docutils.sourceforge.net/docs/ref/rst/introduction.rst
 Redirect permanent /spec/rst/introduction.html     http://docutils.sourceforge.net/docs/ref/rst/introduction.html
 
 RedirectMatch permanent /spec/pep-(.*) http://docutils.sourceforge.net/docs/peps/pep-$1
 
-Redirect permanent /tools/test.txt  http://docutils.sourceforge.net/docs/user/rst/demo.txt
+Redirect permanent /tools/test.txt  http://docutils.sourceforge.net/docs/user/rst/demo.rst
 Redirect permanent /tools/test.html http://docutils.sourceforge.net/docs/user/rst/demo.html

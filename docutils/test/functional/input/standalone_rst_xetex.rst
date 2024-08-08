@@ -1,4 +1,4 @@
-.. include:: standalone_rst_latex.txt
+.. include:: standalone_rst_latex.rst
    :end-before: preface for System Messages:
 
 Tests for the XeTeX writer
@@ -17,4 +17,4 @@ polyglossia_ package.
 .. _polyglossia: http://ctan.org/pkg/polyglossia
 
 .. preface for System Messages:
-.. include:: data/errors.txt
+.. include:: data/errors.rst

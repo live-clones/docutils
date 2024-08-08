@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ===============================
  Docutils_ Distributor's Guide
@@ -100,7 +100,7 @@ directory and run::
 Then install the following files to ``/usr/share/doc/docutils/`` (or
 wherever you install documentation):
 
-* All ``.html`` and ``.txt`` files in the base directory.
+* All ``.html`` and ``.rst`` files in the base directory.
 
 * The ``docs/`` directory.
 
@@ -113,19 +113,19 @@ wherever you install documentation):
 * ``html4css1.css`` in the base directory.
 
 
-Removing the ``.txt`` Files
+Removing the ``.rst`` Files
 ---------------------------
 
-If you are tight with disk space, you can remove all ``.txt`` files in
+If you are tight with disk space, you can remove all ``.rst`` files in
 the tree except for:
 
 * those in the ``licenses/`` directory because they have not been
   processed to HTML and
 
-* ``user/rst/cheatsheet.txt`` and ``user/rst/demo.txt``, which should
+* ``user/rst/cheatsheet.rst`` and ``user/rst/demo.rst``, which should
   be readable in source form.
 
-Before you remove the ``.txt`` files you should rerun ``buildhtml.py``
+Before you remove the ``.rst`` files you should rerun ``buildhtml.py``
 with the ``--no-source-link`` switch to avoid broken references to the
 source files.
 

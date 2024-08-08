@@ -5,7 +5,7 @@ Paragraphs may contain footnote references (manually numbered
 [1]_, anonymous auto-numbered [#]_, labeled auto-numbered [#label]_, or
 symbolic [*]_) or citation references ([CIT2002]_, [DU2015]_).
 
-.. include:: data/standard.txt
+.. include:: data/standard.rst
    :start-after: Footnotes
                  ---------
    :end-before: Here's a reference to the above, [CIT2002]_,

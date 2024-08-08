@@ -1,4 +1,4 @@
-.. include:: docs/header0.txt
+.. include:: docs/header0.rst
 
 ========================
  Docutils Release Notes
@@ -1205,7 +1205,7 @@ Documentation:
 
 * Added `Deploying Docutils Securely`__
 
-  __ docs/howto/security.txt
+  __ docs/howto/security.rst
 
 Internationalization:
 

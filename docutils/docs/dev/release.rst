@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 =============================
  Docutils_ Release Procedure
@@ -24,15 +24,15 @@ Steps to take and watch
 
   Consider **feature freeze** or/and **check-in freeze** .
 
-* Update RELEASE-NOTES.txt add section ``Release <version>``.
+* Update RELEASE-NOTES.rst add section ``Release <version>``.
 
-  Consult HISTORY.txt for important changes.
+  Consult HISTORY.rst for important changes.
 
-* Change HISTORY.txt title ``Changes Since <previous release>`` to ``Release <version>``.
+* Change HISTORY.rst title ``Changes Since <previous release>`` to ``Release <version>``.
 
 * Set new version (replace ``<version>`` with the new version indentifier
   and ``<docutils-repository-root>`` with the dir containing
-  ``HISTORY.txt`` and ``RELEASE-NOTES.txt``)::
+  ``HISTORY.rst`` and ``RELEASE-NOTES.rst``)::
 
       cd <docutils-repository-root>
       ../sandbox/infrastructure/set_version.sh <version>
@@ -86,7 +86,7 @@ Steps to take and watch
     cp -Lr ../docutils-code/docutils/test .
     python test/alltests.py
 
-  Ignore missing HISTORY.txt it is not in the wheel file.
+  Ignore missing HISTORY.rst it is not in the wheel file.
   if ok ::
 
     deactivate ; cd .. ; rm -r du3
@@ -107,7 +107,7 @@ Steps to take and watch
     cp -Lr ../docutils-code/docutils/test .
     python test/alltests.py
 
-  Ignore ``test_find_file_in_dirs`` fails because HISTORY.txt is missing or/and
+  Ignore ``test_find_file_in_dirs`` fails because HISTORY.rst is missing or/and
   missing pil.
 
     deactivate ; cd .. ; rm -r du3s
@@ -144,7 +144,7 @@ Steps to take and watch
     cp -Lr ../docutils-code/docutils/test .
     python test/alltests.py
 
-  Ignore ``test_find_file_in_dirs`` fails because HISTORY.txt is missing.
+  Ignore ``test_find_file_in_dirs`` fails because HISTORY.rst is missing.
 
     deactivate ; cd .. ; rm -r du3s
 
@@ -176,7 +176,7 @@ For final releases continue
     find . -name __pycache__ -exec rmdir -v {} \;
     rsync -e ssh -r -t ./ web.sourceforge.net:/home/project-web/docutils/htdocs/#.#
 
-* Check web/index.txt for necessary corrections.
+* Check web/index.rst for necessary corrections.
 * Run sandbox/infrastructure/docutils-update.local to update web-content.
 * Release to sourceforge.
 
@@ -184,7 +184,7 @@ For final releases continue
   - Select docutils-#.#.tar.gz as default for all OS.
 
 * set_version #.{#+1}b.dev
-* docutils/HISTORY.txt: add title "Changes Since #.#"
+* docutils/HISTORY.rst: add title "Changes Since #.#"
 * run sandbox/infrastructure/docutils-update.local
 
 .. Emacs settings

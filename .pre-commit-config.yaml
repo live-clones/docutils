@@ -7,9 +7,9 @@ repos:
     hooks:
     -   id: check-added-large-files
     -   id: trailing-whitespace
-        exclude: ^sandbox|(.el|.svg|.tex|pseudoxml.txt)$
+        exclude: ^sandbox|(.el|.svg|.tex|pseudoxml.rst)$
     -   id: end-of-file-fixer
-        exclude: ^sandbox|(.svg|docutils/test/data/utf-16-le-sig.txt)$
+        exclude: ^sandbox|(.svg|docutils/test/data/utf-16-le-sig.rst)$
 
 -   repo: https://github.com/pycqa/flake8
     rev: 7.1.0

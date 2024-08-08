@@ -8,7 +8,7 @@
 :Description: This is a "docinfo block", or bibliographic field list
 
 .. NOTE:: If you are reading this as HTML, please read
-   `<cheatsheet.txt>`_ instead to see the input syntax examples!
+   `<cheatsheet.rst>`_ instead to see the input syntax examples!
 
 Section Structure
 =================
@@ -35,7 +35,7 @@ Grid table:
 Simple tables:
 
 ================  ============================================================
-List Type         Examples (syntax in the `text source <cheatsheet.txt>`_)
+List Type         Examples (syntax in the `text source <cheatsheet.rst>`_)
 ================  ============================================================
 Bullet list       * items begin with "-", "+", or "*"
 Enumerated list   1. items use any variation of "1.", "A)", and "(i)"

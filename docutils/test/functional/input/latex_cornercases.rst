@@ -6,8 +6,8 @@ trouble for the LaTeX writer.
 
 .. contents::
 
-.. include:: data/section_titles.txt
-.. include:: data/option_lists.txt
+.. include:: data/section_titles.rst
+.. include:: data/option_lists.rst
 
 Block Quotes
 ============
@@ -53,9 +53,9 @@ Image with 100% width:
 .. image:: ../../../docs/user/rst/images/title.png
    :width: 100%
 
-.. include:: data/tables_latex.txt
-.. include:: data/nonalphanumeric.txt
-.. include:: data/unicode.txt
-.. include:: data/latex_encoding.txt
-.. include:: data/hyperlinking.txt
-.. include:: data/urls.txt
+.. include:: data/tables_latex.rst
+.. include:: data/nonalphanumeric.rst
+.. include:: data/unicode.rst
+.. include:: data/latex_encoding.rst
+.. include:: data/hyperlinking.rst
+.. include:: data/urls.rst

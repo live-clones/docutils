@@ -9,7 +9,7 @@
 :Copyright: 2004 by `Enthought, Inc. <http://www.enthought.com>`_
 :License: `Enthought License`_ (BSD-style)
 
-.. _Enthought License: https://docutils.sourceforge.io/licenses/enthought.txt
+.. _Enthought License: https://docutils.sourceforge.io/licenses/enthought.rst
 
 This document should be read in conjunction with the `Enthought API
 Documentation Tool RFP`__ prepared by Janet Swisher.
@@ -116,7 +116,7 @@ follows::
     :Copyright: This document has been placed in the public domain.
 
 This is in conjunction with the "Public Domain Dedication" section of
-COPYING.txt__.
+COPYING.rst__.
 
 __ https://docutils.sourceforge.io/COPYING.html
 

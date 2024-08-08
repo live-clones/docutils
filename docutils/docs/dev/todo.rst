@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ======================
  Docutils_ To Do List
@@ -314,16 +314,16 @@ Code cleanup and modernization:
       First the ToC::
 
           .. ToC-list::
-              Introduction.txt
-              Objects.txt
-              Data.txt
-              Control.txt
+              Introduction.rst
+              Objects.rst
+              Data.rst
+              Control.rst
 
       Then a sample use::
 
-          .. include:: ToC.txt
+          .. include:: ToC.rst
 
-          As I said earlier in chapter :chapter:`Objects.txt`, the
+          As I said earlier in chapter :chapter:`Objects.rst`, the
           reference count gets increased every time a binding is made.
 
       Which produces::
@@ -342,14 +342,14 @@ Code cleanup and modernization:
   files::
 
       .. manifest::
-         intro: Introduction.txt
-         objects: Objects.txt
-         data: Data.txt
-         control: Control.txt
+         intro: Introduction.rst
+         objects: Objects.rst
+         data: Data.rst
+         control: Control.rst
 
   Then the sample becomes::
 
-      .. include:: manifest.txt
+      .. include:: manifest.rst
 
       As I said earlier in chapter :chapter:`objects`, the
       reference count gets increased every time a binding is made.
@@ -427,7 +427,7 @@ Code cleanup and modernization:
 * Support "include" as embedded inline-compatible directive in substitution
   definitions, e.g. ::
 
-    .. |version| include:: version.txt
+    .. |version| include:: version.rst
 
     This document describes version |version| of ...
 
@@ -449,13 +449,13 @@ Code cleanup and modernization:
 
   + Variable content taken from a file, e.g.
 
-    version.txt::
+    version.rst::
 
        .. |version| replace:: 3.1
 
     optionally used as::
 
-       .. include:: version.txt
+       .. include:: version.rst
           :optional: .. |version| replace:: unknown
 
        This document describes version |version| of ...
@@ -524,13 +524,13 @@ Code cleanup and modernization:
 
 * Add file-specific settings support to config files, like::
 
-      [file index.txt]
+      [file index.rst]
       compact-lists: no
 
   Is this even possible?  Should the criterion be the name of the
   input file or the output file?  Alternative (more explicit) syntax::
 
-      [source_file index.txt]
+      [source_file index.rst]
       ...
 
       [dest_file index.html]
@@ -549,7 +549,7 @@ Code cleanup and modernization:
 
 * tools/buildhtml.py: Extend the --prune option ("prune" config
   setting) to accept file names (generic path) in addition to
-  directories (e.g. --prune=docs/user/rst/cheatsheet.txt, which should
+  directories (e.g. --prune=docs/user/rst/cheatsheet.rst, which should
   *not* be converted to HTML).
 
 * Add support for _`plugins`.
@@ -558,7 +558,7 @@ Code cleanup and modernization:
   /etc/docutils.conf are read as configuration_ files.  Proposal: allow
   ~/.docutils to be a a configuration *directory*, along with
   /etc/docutils/ and ./docutils.conf/.  Within these directories,
-  check for config.txt files.  We can also have subdirectories here,
+  check for config.rst files.  We can also have subdirectories here,
   for plugins, S5 themes, components (readers/writers/parsers) etc.
 
   Docutils will continue to support configuration files for backwards
@@ -676,9 +676,9 @@ User Docs
   <http://article.gmane.org/gmane.text.docutils.user/1584>.
 
 * Add document about what Docutils has previously been used for
-  (web/use-cases.txt?).
+  (web/use-cases.rst?).
 
-* Improve index in docs/user/config.txt.
+* Improve index in docs/user/config.rst.
 
 
 Developer Docs
@@ -693,7 +693,7 @@ Developer Docs
   - docutils.parsers.rst.states: more complete documentation of parser
     internals.
 
-* docs/ref/doctree.txt: DTD element structural relationships,
+* docs/ref/doctree.rst: DTD element structural relationships,
   semantics, and attributes.  In progress; element descriptions to be
   completed.
 
@@ -713,7 +713,7 @@ Developer Docs
 
 * Document the docutils.nodes APIs.
 
-* Complete the docs/api/publisher.txt docs.
+* Complete the docs/api/publisher.rst docs.
 
 
 How-Tos
@@ -981,7 +981,7 @@ Misc
 
   - Shell sessions::
 
-        $ cat example1.txt
+        $ cat example1.rst
         A block beginning with a "$ " prompt is interpreted as a shell
         session interactive block.  As with Doctest blocks, the
         interactive block ends with the first blank line, and wouldn't
@@ -989,7 +989,7 @@ Misc
 
   - Root shell sessions::
 
-        # cat example2.txt
+        # cat example2.rst
         A block beginning with a "# " prompt is interpreted as a root
         shell session (the user is or has to be logged in as root)
         interactive block.  Again, the block ends with a blank line.
@@ -1006,10 +1006,8 @@ Misc
   specified as global/pragma using ":global:" options.
 
 * Support whitespace in angle-bracketed standalone URLs according to
-  Appendix E ("Recommendations for Delimiting URI in Context") of `RFC
-  2396`_.
-
-  .. _RFC 2396: https://www.rfc-editor.org/rfc/rfc2396.txt
+  Appendix E ("Recommendations for Delimiting URI in Context") of
+  :RFC:`2396`.
 
 * Use the vertical spacing of the source text to determine the
   corresponding vertical spacing of the output?
@@ -1218,7 +1216,7 @@ Questions
 
 Should Docutils support adaptable file extensions in hyperlinks?
 
-  In the rST source, sister documents are ".txt" files. If we're
+  In the rST source, sister documents are ".rst" files. If we're
   generating HTML, then ".html" is appropriate; if PDF, then ".pdf";
   etc.
 
@@ -1304,11 +1302,11 @@ Chris Liechti suggests a new ``:link:`` role in `more-universal
 links?`__::
 
     .. role:: link(rewrite)
-       :transform: .txt|.html
+       :transform: .rst|.html
 
   and then to use it::
 
-    for more information see :link:`README.txt`
+    for more information see :link:`README.rst`
 
   it would be useful if it supported an additional option
   ``:format: html`` so that separate rules for each format can be
@@ -1319,30 +1317,30 @@ __ https://sourceforge.net/p/docutils/mailman/message/6919484/
 
 Idea from Jim Fulton: an external lookup table of targets:
 
-    I would like to specify the extension (e.g. .txt) [in the
+    I would like to specify the extension (e.g. .rst) [in the
     source, rather than ``filename.*``], but tell the converter to
     change references to the files anticipating that the files will
     be converted too.
 
     For example::
 
-      .. _Another Document: another.txt
+      .. _Another Document: another.rst
 
-      rst2html --convert-links "another.txt bar.txt" foo.txt
+      rst2html --convert-links "another.rst bar.rst" foo.rst
 
     That is, name the files for which extensions should be converted.
 
     Note that I want to refer to original files in the original text
-    (another.txt rather than another.*) because I want the
+    (another.rst rather than another.*) because I want the
     unconverted text to stand on its own.
 
     Note that in most cases, people will be able to use globs::
 
-      rst2html --convert-link-extensions-for "`echo *.txt`" foo.txt
+      rst2html --convert-link-extensions-for "`echo *.rst`" foo.rst
 
     It might be nice to be able to use multiple arguments, as in::
 
-      rst2html --convert-link-extensions-for *.txt -- foo.txt
+      rst2html --convert-link-extensions-for *.rst -- foo.rst
 
     > Handle documents only, or objects (images, etc.) also?
 
@@ -1655,7 +1653,7 @@ when used in a document.
     - Add support for inclusion by URL? ::
 
           .. include::
-             :url: https://www.example.org/inclusion.txt
+             :url: https://www.example.org/inclusion.rst
 
     - Strip blank lines from begin and end of a literal included file or
       file section. This would correspond to the way a literal block is
@@ -2621,7 +2619,7 @@ Tables
 
 * Table heads and footer for longtable (firstpage lastpage ..)?
 
-* In tools.txt the option tables right column, there should be some more
+* In tools.rst the option tables right column, there should be some more
   spacing between the description and the next paragraph "Default:".
 
 * Paragraph separation in tables is hairy.
@@ -2645,7 +2643,7 @@ Image and figure directives
 
 * compare the test case in:
 
-  + `<../../test/functional/input/data/standard.txt>`__
+  + `<../../test/functional/input/data/standard.rst>`__
   + `<../../test/functional/expected/standalone_rst_html4css1.html>`__
   + `<../../test/functional/expected/standalone_rst_latex.tex>`__
 

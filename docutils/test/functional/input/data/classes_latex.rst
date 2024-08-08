@@ -2,7 +2,7 @@ class handling
 --------------
 
 This section tests class handling for block level elements by the LaTeX
-writer. See the input file ``classes_latex.txt`` for the raw LaTeX code used
+writer. See the input file ``classes_latex.rst`` for the raw LaTeX code used
 to style the examples.
 
 An "epigraph" directive is exported as "quote" wrapped in a "DUclass"

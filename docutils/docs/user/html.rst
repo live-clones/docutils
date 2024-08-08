@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 =====================
 Docutils HTML writers
@@ -101,8 +101,8 @@ html5
 The ``html5`` writer generates `polyglot HTML`_ output, valid
 XML [#safetext]_ that is compatible with `HTML5`_. New features and elements
 are used if they are widely supported.
-See the `HTML5 test page`_ (and the sources `html5-features.txt`_ and
-`html5-text-level-tags.txt`_) for further differences to the html4css1_
+See the `HTML5 test page`_ (and the sources `html5-features.rst`_ and
+`html5-text-level-tags.rst`_) for further differences to the html4css1_
 writer.
 
 There is no hard-coded formatting information in the HTML document.
@@ -118,10 +118,10 @@ New in Docutils 0.13
    ensured by the author.
 .. _HTML5 test page: https://docutils.sourceforge.io/test/functional/
     expected/standalone_rst_html5.html#changes-to-the-html4css1-writer
-.. _html5-features.txt: https://docutils.sourceforge.io/test/functional/
-    input/data/html5-features.txt
-.. _html5-text-level-tags.txt: https://docutils.sourceforge.io/test/functional/
-    input/data/html5-text-level-tags.txt
+.. _html5-features.rst: https://docutils.sourceforge.io/test/functional/
+    input/data/html5-features.rst
+.. _html5-text-level-tags.rst: https://docutils.sourceforge.io/test/functional/
+    input/data/html5-text-level-tags.rst
 .. _rst2html5: tools.html#rst2html5
 .. _[html5 writer]: config.html#html5-writer
 .. _minimal.css: ../../docutils/writers/html5_polyglot/minimal.css

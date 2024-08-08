@@ -104,13 +104,13 @@ Writer-specific:
 
 `reStructuredText <https://docutils.sourceforge.io/rst.html>`_:
   * `A ReStructuredText Primer <user/rst/quickstart.html>`__
-    (see also the `text source <user/rst/quickstart.txt>`__)
+    (see also the `text source <user/rst/quickstart.rst>`__)
   * `Quick reStructuredText <user/rst/quickref.html>`__ (user reference)
-  * `reStructuredText Cheat Sheet <user/rst/cheatsheet.txt>`__ (text
+  * `reStructuredText Cheat Sheet <user/rst/cheatsheet.rst>`__ (text
     only; 1 page for syntax, 1 page directive & role reference)
   * `Demonstration <user/rst/demo.html>`_
     of most reStructuredText features
-    (see also the `text source <user/rst/demo.txt>`__)
+    (see also the `text source <user/rst/demo.rst>`__)
 
 Editor support:
   * `Emacs support for reStructuredText <user/emacs.html>`_

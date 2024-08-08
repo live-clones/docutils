@@ -1,6 +1,6 @@
 .. -*- coding: utf-8 -*-
 
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ========================================
    Emacs Support for reStructuredText

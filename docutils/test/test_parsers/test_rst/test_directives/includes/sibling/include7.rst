@@ -1,1 +1,1 @@
-In includes/sibling/include7.txt
+In includes/sibling/include7.rst

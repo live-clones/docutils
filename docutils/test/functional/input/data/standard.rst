@@ -892,9 +892,9 @@ Docutils uses LaTeX syntax for math directives and roles:
 :tex:`\alpha = f(x)` prints :math:`\alpha = f(x)`.
 
 The ``:code:`` option of the `include` directive sets the included content
-as a code block, here the rst file ``header_footer.txt`` with line numbers:
+as a code block, here the rst file ``header_footer.rst`` with line numbers:
 
-.. include:: header_footer.txt
+.. include:: header_footer.rst
    :code: rst
    :number-lines:
 

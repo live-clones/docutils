@@ -1,4 +1,4 @@
-.. include:: docs/header0.txt
+.. include:: docs/header0.rst
 
 ==================
  Docutils History

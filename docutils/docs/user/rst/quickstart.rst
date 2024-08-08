@@ -1,4 +1,4 @@
-.. include:: ../../header2.txt
+.. include:: ../../header2.rst
 
 A ReStructuredText Primer
 =========================

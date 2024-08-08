@@ -1,4 +1,4 @@
-<document ids="restructuredtext-test-document doctitle" names="restructuredtext\ test\ document doctitle" source="functional/input/standalone_rst_pseudoxml.txt" title="reStructuredText Test Document">
+<document ids="restructuredtext-test-document doctitle" names="restructuredtext\ test\ document doctitle" source="functional/input/standalone_rst_pseudoxml.rst" title="reStructuredText Test Document">
     <title>
         reStructuredText Test Document
     <subtitle ids="examples-of-syntax-constructs subtitle" names="examples\ of\ syntax\ constructs subtitle">
@@ -636,7 +636,7 @@
                         <list_item>
                             <paragraph>
                                 Four
-                    <system_message level="1" line="8" source="functional/input/data/standard.txt" type="INFO">
+                    <system_message level="1" line="8" source="functional/input/data/standard.rst" type="INFO">
                         <paragraph>
                             Enumerated list start value not ordinal-1: "3" (ordinal 3)
                     <enumerated_list enumtype="upperalpha" prefix="" start="3" suffix=".">
@@ -646,7 +646,7 @@
                         <list_item>
                             <paragraph>
                                 D
-                    <system_message level="1" line="8" source="functional/input/data/standard.txt" type="INFO">
+                    <system_message level="1" line="8" source="functional/input/data/standard.rst" type="INFO">
                         <paragraph>
                             Enumerated list start value not ordinal-1: "C" (ordinal 3)
                     <enumerated_list enumtype="lowerroman" prefix="" start="3" suffix=".">
@@ -656,7 +656,7 @@
                         <list_item>
                             <paragraph>
                                 iv
-                    <system_message level="1" line="8" source="functional/input/data/standard.txt" type="INFO">
+                    <system_message level="1" line="8" source="functional/input/data/standard.rst" type="INFO">
                         <paragraph>
                             Enumerated list start value not ordinal-1: "iii" (ordinal 3)
         <section ids="definition-lists" names="definition\ lists">
@@ -1173,7 +1173,7 @@
                     <generated classes="sectnum">
                         2.13.2   
                     Duplicate Target Names
-                <system_message backrefs="duplicate-target-names-1" level="1" line="437" source="functional/input/data/standard.txt" type="INFO">
+                <system_message backrefs="duplicate-target-names-1" level="1" line="437" source="functional/input/data/standard.rst" type="INFO">
                     <paragraph>
                         Duplicate implicit target name: "duplicate target names".
                 <paragraph>
@@ -1994,9 +1994,9 @@
                      directive sets the included content
                     as a code block, here the rst file 
                     <literal>
-                        header_footer.txt
+                        header_footer.rst
                      with line numbers:
-                <literal_block classes="code rst" source="functional/input/data/header_footer.txt" xml:space="preserve">
+                <literal_block classes="code rst" source="functional/input/data/header_footer.rst" xml:space="preserve">
                     <inline classes="ln">
                         1 
                     .. header:: Document header
@@ -2395,45 +2395,45 @@
     <section classes="system-messages">
         <title>
             Docutils System Messages
-        <system_message backrefs="problematic-1" ids="system-message-1" level="3" line="99" source="functional/input/data/standard.txt" type="ERROR">
+        <system_message backrefs="problematic-1" ids="system-message-1" level="3" line="99" source="functional/input/data/standard.rst" type="ERROR">
             <paragraph>
                 Undefined substitution referenced: "problematic".
-        <system_message backrefs="footnote-reference-8" ids="system-message-2" level="3" line="390" source="functional/input/data/standard.txt" type="ERROR">
+        <system_message backrefs="footnote-reference-8" ids="system-message-2" level="3" line="390" source="functional/input/data/standard.rst" type="ERROR">
             <paragraph>
                 Unknown target name: "5".
-        <system_message backrefs="citation-reference-3" ids="system-message-3" level="3" line="399" source="functional/input/data/standard.txt" type="ERROR">
+        <system_message backrefs="citation-reference-3" ids="system-message-3" level="3" line="399" source="functional/input/data/standard.rst" type="ERROR">
             <paragraph>
                 Unknown target name: "nonexistent".
-        <system_message backrefs="problematic-2" ids="system-message-4" level="3" line="426" source="functional/input/data/standard.txt" type="ERROR">
+        <system_message backrefs="problematic-2" ids="system-message-4" level="3" line="426" source="functional/input/data/standard.rst" type="ERROR">
             <paragraph>
                 Unknown target name: "hyperlink reference without a target".
-        <system_message backrefs="problematic-3" ids="system-message-5" level="3" line="439" source="functional/input/data/standard.txt" type="ERROR">
+        <system_message backrefs="problematic-3" ids="system-message-5" level="3" line="439" source="functional/input/data/standard.rst" type="ERROR">
             <paragraph>
                 Duplicate target name, cannot be used as a unique reference: "duplicate target names".
-        <system_message level="1" line="159" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="159" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "target" is not referenced.
-        <system_message level="1" line="404" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="404" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "another-target" is not referenced.
-        <system_message level="1" line="474" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="474" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "image-target-1" is not referenced.
-        <system_message level="1" line="475" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="475" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "image-target-2" is not referenced.
-        <system_message level="1" line="476" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="476" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "image-target-3" is not referenced.
-        <system_message level="1" line="640" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="640" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "target1" is not referenced.
-        <system_message level="1" line="641" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="641" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "target2" is not referenced.
-        <system_message level="1" line="686" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="686" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "docutils" is not referenced.
-        <system_message level="1" line="852" source="functional/input/data/standard.txt" type="INFO">
+        <system_message level="1" line="852" source="functional/input/data/standard.rst" type="INFO">
             <paragraph>
                 Hyperlink target "hyperlink targets" is not referenced.

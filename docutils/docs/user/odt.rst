@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 =======================
 ODT Writer for Docutils
@@ -50,7 +50,7 @@ How to Use It
 
 Run it from the command line as follows::
 
-    $ rst2odt myinput.txt > myoutput.odt
+    $ rst2odt myinput.rst > myoutput.odt
 
 To see usage information and to learn about command line options
 that you can use, run the following::
@@ -59,10 +59,10 @@ that you can use, run the following::
 
 Examples::
 
-    $ rst2odt -s -g python_comments.txt > python_comments.odt
+    $ rst2odt -s -g python_comments.rst > python_comments.odt
 
-    $ rst2odt --source-url=odtwriter.txt --generator \
-        --stylesheet=/myconfigs/styles.odt odtwriter.txt > odtwriter.odt
+    $ rst2odt --source-url=odtwriter.rst --generator \
+        --stylesheet=/myconfigs/styles.odt odtwriter.rst > odtwriter.odt
 
 
 Configuration file
@@ -223,7 +223,7 @@ Notice that you can make a copy of file ``styles.odt``, modify it
 using ``oowriter``, and then use your copy with the
 ``--stylesheet=<file>`` command line option.  Example::
 
-    $ rst2odt --stylesheet=mystyles.odt test2.txt > test2.odt
+    $ rst2odt --stylesheet=mystyles.odt test2.rst > test2.odt
 
 
 Paragraph styles
@@ -743,7 +743,7 @@ contain them, do the following:
    custom style definitions.  For example::
 
        rst2odt --odf-config-file=mymappingfile.ini \
-         --stylesheet=mystyles.odt mydoc.txt mydoc.odt
+         --stylesheet=mystyles.odt mydoc.rst mydoc.odt
 
 
 Classes
@@ -840,7 +840,7 @@ blocks.  In order to activate this, do all of the following:
 2. Use the command line option ``--add-syntax-highlighting``.
    Example::
 
-       $ rst2odt --add-syntax-highlight test.txt > test.odt
+       $ rst2odt --add-syntax-highlight test.rst > test.odt
 
 The following styles are defined in styles.odt and are used for
 literal code blocks and syntax highlighting:
@@ -1110,7 +1110,7 @@ or "--custom-odt-footer" command line options.  For example, the
 following inserts a footer containing the page number and page
 count::
 
-    $ rst2odt --custom-odt-footer="Page %p% of %P%" f1.txt > f1.odt
+    $ rst2odt --custom-odt-footer="Page %p% of %P%" f1.rst > f1.odt
 
 
 Field specifiers

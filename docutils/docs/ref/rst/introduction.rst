@@ -1,4 +1,4 @@
-.. include:: ../../header2.txt
+.. include:: ../../header2.rst
 
 =====================================
  An Introduction to reStructuredText
@@ -84,7 +84,7 @@ beginning with the most important:
    possible, for the author as well as for the reader.  Constructs
    should take their cues from such naturally occurring sources as
    plaintext email messages, newsgroup postings, and text
-   documentation such as README.txt files.
+   documentation such as README.rst files.
 
 6. Easy.  It should be easy to mark up text using any ordinary text
    editor.

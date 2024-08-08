@@ -1,4 +1,4 @@
-.. include:: docs/header0.txt
+.. include:: docs/header0.rst
 
 ==================
  Copying Docutils
@@ -79,7 +79,7 @@ The exceptions to the `Public Domain Dedication`_ above are:
   (released under a "revised" `BSD 3-Clause License`_ included in the file)
   and smartypants.py © 2004, 2007 Chad Miller.
   Released under the terms of the `BSD 2-Clause License`_
-  (`local copy <licenses/BSD-2-Clause.txt>`__).
+  (`local copy <licenses/BSD-2-Clause.rst>`__).
 
   .. _SmartyPants: http://daringfireball.net/projects/smartypants/
 
@@ -87,7 +87,7 @@ The exceptions to the `Public Domain Dedication`_ above are:
 
   Copyright © Jens Jørgen Mortensen, Günter Milde.
   Released under the terms of the `BSD 2-Clause License`_
-  (`local copy <licenses/BSD-2-Clause.txt>`__).
+  (`local copy <licenses/BSD-2-Clause.rst>`__).
 
 * | docutils/utils/math/math2html.py,
   | docutils/writers/html5_polyglot/math.css
@@ -97,7 +97,7 @@ The exceptions to the `Public Domain Dedication`_ above are:
   These files were part of eLyXer_, released under the `GNU
   General Public License`_ version 3 or later. The author relicensed
   them for Docutils under the terms of the `BSD 2-Clause License`_
-  (`local copy <licenses/BSD-2-Clause.txt>`__).
+  (`local copy <licenses/BSD-2-Clause.rst>`__).
 
   .. _eLyXer: https://github.com/alexfernandez/elyxer
 
@@ -126,14 +126,14 @@ The exceptions to the `Public Domain Dedication`_ above are:
 
   Copyright © Günter Milde.
   Released under the terms of the `BSD 2-Clause License`_
-  (`local copy <licenses/BSD-2-Clause.txt>`__).
+  (`local copy <licenses/BSD-2-Clause.rst>`__).
 
 * docutils/utils/roman.py
 
   copyright by Mark Pilgrim, released under the
   `Zope Public License Version 2.1`_ (`local copy`__).
 
-  __ licenses/ZPL-2-1.txt
+  __ licenses/ZPL-2-1.rst
 
 * tools/editors/emacs/rst.el
 
@@ -141,7 +141,7 @@ The exceptions to the `Public Domain Dedication`_ above are:
   released under the `GNU General Public License`_ version 3 or later
   (`local copy`__).
 
-  __ licenses/gpl-3-0.txt
+  __ licenses/gpl-3-0.rst
 
 All used licenses are OSI-approved_ and GPL-compatible_.
 

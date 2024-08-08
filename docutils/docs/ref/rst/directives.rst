@@ -1,4 +1,4 @@
-.. include:: ../../header2.txt
+.. include:: ../../header2.rst
 
 =============================
  reStructuredText Directives
@@ -1545,7 +1545,7 @@ point of the directive. For example::
     This first example will be parsed at the document level, and can
     thus contain any construct, including section headers.
 
-    .. include:: inclusion.txt
+    .. include:: inclusion.rst
 
     Back in the main document.
 
@@ -1553,7 +1553,7 @@ point of the directive. For example::
         Therefore it may only contain body elements.  It may not
         contain section headers.
 
-        .. include:: inclusion.txt
+        .. include:: inclusion.rst
 
 If an included document fragment contains section structure, the title
 adornments must match those of the master document.

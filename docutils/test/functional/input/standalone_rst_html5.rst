@@ -1,16 +1,16 @@
-.. include:: data/standard.txt
-.. include:: data/header_footer.txt
-.. include:: data/table_colspan.txt
-.. include:: data/table_rowspan.txt
-.. include:: data/table_complex.txt
-.. include:: data/list_table.txt
-.. include:: data/custom_roles.txt
+.. include:: data/standard.rst
+.. include:: data/header_footer.rst
+.. include:: data/table_colspan.rst
+.. include:: data/table_rowspan.rst
+.. include:: data/table_complex.rst
+.. include:: data/list_table.rst
+.. include:: data/custom_roles.rst
 
-.. include:: data/html5-features.txt
-.. include:: data/html5-text-level-tags.txt
+.. include:: data/html5-features.rst
+.. include:: data/html5-text-level-tags.rst
 
-.. include:: data/svg_images.txt
-.. include:: data/errors.txt
+.. include:: data/svg_images.rst
+.. include:: data/errors.rst
 
 .. footer:: |HTML 5| |validator| |valid-CSS2|
 

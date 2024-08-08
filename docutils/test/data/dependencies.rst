@@ -6,14 +6,14 @@ conjunction with programs like ``make``.
 
 Included files are recorded:
 
-.. include:: include.txt
+.. include:: include.rst
 
 .. raw:: HTML
-   :file: raw.txt
+   :file: raw.rst
 
 Dependencies are recorded only once:
 
-.. include:: include.txt
+.. include:: include.rst
 
 Image files are only recorded, if actually accessed
 (to extract the size or if embedded in the output document):
@@ -34,4 +34,4 @@ TODO: Paths in included files should be rewritten relative to the base
       * when loading images,
       * when recording dependencies.
 
-.. include: subdir/dependencies-included.txt
+.. include: subdir/dependencies-included.rst

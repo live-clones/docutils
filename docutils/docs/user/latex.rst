@@ -1,4 +1,4 @@
-.. include:: ../header.txt
+.. include:: ../header.rst
 
 ================================
  Generating LaTeX with Docutils
@@ -272,12 +272,12 @@ Custom LaTeX code can be placed in `style sheets`_, the
 The functional tests that come with Docutils, can serve as example.
 
 input:
-  standalone_rst_latex.txt_ (includes files from `tests/functional/input/data`_)
+  standalone_rst_latex.rst_ (includes files from `tests/functional/input/data`_)
 expected output:
   standalone_rst_latex.tex_
 
-.. _standalone_rst_latex.txt:
-  https://sourceforge.net/p/docutils/code/HEAD/tree/trunk/docutils/test/functional/input/standalone_rst_latex.txt
+.. _standalone_rst_latex.rst:
+  https://sourceforge.net/p/docutils/code/HEAD/tree/trunk/docutils/test/functional/input/standalone_rst_latex.rst
 .. _tests/functional/input/data:
   https://sourceforge.net/p/docutils/code/HEAD/tree/trunk/docutils/test/functional/input/data
 .. _standalone_rst_latex.tex:
@@ -1911,7 +1911,7 @@ footnote mark and text at different pages
 Docutils stores the footnote text in a separate node, at the position where
 it is specified in the input document. With the default settings, the
 footnote is put at the bottom of the page where the footnote text is located,
-maybe far away from the footnote mark (see e.g. `<rst/demo.txt>`_).
+maybe far away from the footnote mark (see e.g. `<rst/demo.rst>`_).
 
 To get footnote mark and text at the same page, keep footnote mark and
 footnote text close together.
@@ -2177,7 +2177,7 @@ Miscellaneous
   complicated).
 
 * Hyperlinks are not hyphenated; this leads to bad spacing. See
-  docs/user/rst/demo.txt 2.14 directives.
+  docs/user/rst/demo.rst 2.14 directives.
 
 * Pagestyle headings does not work, when sections are starred. Use LaTeX for
   the section numbering with the `options/settings`_
