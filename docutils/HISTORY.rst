@@ -42,6 +42,10 @@ Release 0.23b.dev (unpublished)
   - Add source and line info to <table> elements.
   - Fix bug #517: wrong "input_offset" when parsing table cell content.
 
+* docutils/writers/html5_polyglot/__init__.py
+
+  - Use a section's last "ids" attribute for the "section-self-link".
+
 * docutils/writers/latex2e/*
 
   - Default styling for "semantic inline markup roles" from the

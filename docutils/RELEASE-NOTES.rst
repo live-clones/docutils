@@ -108,11 +108,6 @@ Writers
 
 * "html5" writer:
 
-  - If a section title has several IDs, use the last one (from the first
-    `explicit target`__) as self-link_ in Docutils 0.23.
-
-    __ docs/ref/rst/restructuredtext.html#explicit-hyperlink-targets
-
   - The default of the self-link_ configuration setting will change to
     "True" in Docutils 1.0.
 
@@ -296,6 +291,12 @@ rST parser:
   - The highlight language of a custom role based on the `"code" role`_
     defaults to the role's name (if supported by Pygments_).
     Specifying ``:language: none`` turns off syntax highlight.
+
+HTML5 writer:
+  - If a section has several IDs, use the last one (from the first
+    `explicit target`__) as self-link_.
+
+    __ docs/ref/rst/restructuredtext.html#explicit-hyperlink-targets
 
 LaTeX writer:
   - Only write ``\label`` commands for explicit IDs and IDs that are
