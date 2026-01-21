@@ -181,7 +181,9 @@ class Include(Directive):
         literal_block.line = self.options.get('start-line', 0) + 1
         self.add_name(literal_block)
         if 'number-lines' in self.options:
-            firstline = self.options['number-lines'] or 1
+            firstline = self.options['number-lines']
+            if firstline is None:
+                firstline = 1
             text = text.removesuffix('\n')
             lastline = firstline + len(text.splitlines())
             tokens = NumberLines([([], text)], firstline, lastline)

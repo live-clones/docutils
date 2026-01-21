@@ -25,6 +25,8 @@ Release 0.23b.dev (unpublished)
 
   - "Include" options :start-after: and :end-before: may now also
     be used without value (standing for an empty line).
+  - Fix Sphinx issue #14261:
+    The "Include" option :number-lines: changed a start value 0 to 1.
   - The severity of "include" problems is lowered to 3: ERROR.
 
 * docutils/parsers/rst/directives/tables.py,

@@ -210,6 +210,26 @@ f"""\
         This file is used by ``test_include.py``.
 """],
 [f"""\
+Literal include, add line numbers
+
+.. include:: {include1}
+   :literal:
+   :start-line: 2
+   :number-lines: 0
+""",
+f"""\
+<document source="test data">
+    <paragraph>
+        Literal include, add line numbers
+    <literal_block source="{include1}" xml:space="preserve">
+        <inline classes="ln">
+            0 \n\
+        \n\
+        <inline classes="ln">
+            1 \n\
+        This file is used by ``test_include.py``.
+"""],
+[f"""\
 Include code
 
 .. include:: {include1}
@@ -1157,7 +1177,7 @@ Included code
 
 .. include:: {include1}
    :code: rst
-   :number-lines:
+   :number-lines: 0
 """,
 f"""\
 <document source="test data">
@@ -1165,21 +1185,21 @@ f"""\
         Included code
     <literal_block classes="code rst" source="{include1}" xml:space="preserve">
         <inline classes="ln">
-            1 \n\
+            0 \n\
         <inline classes="generic heading">
             Inclusion 1
         \n\
         <inline classes="ln">
-            2 \n\
+            1 \n\
         <inline classes="generic heading">
             -----------
         \n\
         <inline classes="ln">
-            3 \n\
+            2 \n\
         <inline classes="whitespace">
             \n\
         <inline classes="ln">
-            4 \n\
+            3 \n\
         <inline classes="whitespace">
         This file is used by \n\
         <inline classes="literal string">

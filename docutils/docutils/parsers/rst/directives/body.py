@@ -157,7 +157,7 @@ class CodeBlock(Directive):
     optional_arguments = 1
     option_spec = {'class': directives.class_option,
                    'name': directives.unchanged,
-                   'number-lines': directives.unchanged  # integer or None
+                   'number-lines': directives.value_or((None,), int),
                    }
     has_content = True
 
@@ -186,11 +186,9 @@ class CodeBlock(Directive):
                 raise self.warning(error)
 
         if 'number-lines' in options:
-            # optional argument `startline`, defaults to 1
-            try:
-                startline = int(options['number-lines'] or 1)
-            except ValueError:
-                raise self.error(':number-lines: with non-integer start value')
+            startline = self.options['number-lines']
+            if startline is None:
+                startline = 1
             endline = startline + len(self.content)
             # add linenumber filter:
             tokens = NumberLines(tokens, startline, endline)
