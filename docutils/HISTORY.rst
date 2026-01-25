@@ -17,6 +17,10 @@
 Release 0.23b.dev (unpublished)
 ===============================
 
+* docutils/frontend.py
+
+  - Apply patch #216 by Dmitry Shachnev: fix type annotations.
+
 * docutils/parsers/rst/directives/body.py
 
   - Add source and line info to <rubric> elements.
