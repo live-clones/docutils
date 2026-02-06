@@ -1978,18 +1978,11 @@ class document(Root, Element):
             # don't add backref id for empty targets (not shown in output)
             if isinstance(node, target) and 'refuri' in node:
                 backrefs = []
-            msg = self.reporter.system_message(level, s,
-                                               backrefs=backrefs,
+            msg = self.reporter.system_message(level, s, backrefs=backrefs,
                                                base_node=node)
             # try appending near to the problem:
-            if msgnode is not None:
+            if msgnode is not None and 'Body' in repr(msgnode.content_model):
                 msgnode += msg
-                try:
-                    msgnode.validate(recursive=False)
-                except ValidationError:
-                    # detach -> will be handled by `Messages` transform
-                    msgnode.pop()
-                    msg.parent = None
 
     def has_name(self, name: str) -> bool:
         return name in self.nameids
