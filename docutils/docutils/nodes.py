@@ -1913,9 +1913,14 @@ class document(Root, Element):
         implicit  None  implicit  None  implicit  new      INFO
         ========  ====  ========  ====  ========  ======== =======  ======
 
-        .. [#] Do not clear the name-to-id map or invalidate the old target if
-           both old and new targets refer to identical URIs or reference names.
-           The new target is invalidated regardless.
+        .. [#] When "invalidating" an element, `name` is transferred from
+           the element's "name" attribute to its "dupnames" attribute.
+
+        .. [#ex] If both "old" and "new" refer to identical URIs or
+           reference names, keep the old state and only invalidate "new".
+
+        __ https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html
+           #implicit-hyperlink-targets
 
         Provisional. There will be changes to prefer explicit reference names
         as base for an element's ID.

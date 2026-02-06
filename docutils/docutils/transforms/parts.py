@@ -78,9 +78,9 @@ class Contents(Transform):
     The depth may be specified.  Two-way references between the table of
     contents and section titles are generated (requires Writer support).
 
-    This transform requires a startnode, which contains generation
-    options and provides the location for the generated table of contents (the
-    startnode is replaced by the table of contents "topic").
+    This transform requires a startnode, a "pending" element which contains
+    generation options and provides the location for the generated ToC (the
+    startnode is replaced by the table of contents "bullet-list").
     """
 
     default_priority = 720
@@ -91,11 +91,11 @@ class Contents(Transform):
         # TODO: handle "generate_oowriter_toc" setting of the "ODT" writer.
         if toc_by_writer:
             return
+
         details = self.startnode.details
         if 'local' in details:
             startnode = self.startnode.parent.parent
-            while not (isinstance(startnode, nodes.section)
-                       or isinstance(startnode, nodes.document)):
+            while not isinstance(startnode, (nodes.section, nodes.document)):
                 # find the ToC root: a direct ancestor of startnode
                 startnode = startnode.parent
         else:
