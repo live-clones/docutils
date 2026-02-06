@@ -1746,31 +1746,35 @@ class decoration(PreBibliographic, SubStructural, Element):
 
 
 class transition(SubStructural, Element):
-    """Transitions__ are breaks between untitled text parts.
+    """Transitions__ represent "semantic breaks".
 
     __ https://docutils.sourceforge.io/docs/ref/doctree.html#transition
     """
+    # Sibling nodes that are ignored when validating a transition's position
+    # (titles plus moving and invisible elements except comments):
+    ignored_siblings = (decoration, meta, pending, substitution_definition,
+                        subtitle, target, title)
 
     def validate_position(self) -> None:
         """Check additional constraints on `transition` placement.
 
-        A transition may not begin or end a section or document,
+        A transition may not begin or end section or document text,
         nor may two transitions be immediately adjacent.
         """
         messages = [f'Element {self.parent.starttag()} invalid:']
-        predecessor = self.previous_sibling()
-        if (predecessor is None  # index == 0
-            or isinstance(predecessor, (title, subtitle, meta, decoration))
-            # A transition following these elements still counts as
-            # "at the beginning of a document or section".
-            ):
-            messages.append(
-                '<transition> may not begin a section or document.')
-        if self.parent.index(self) == len(self.parent) - 1:
-            messages.append('<transition> may not end a section or document.')
-        if isinstance(predecessor, transition):
+        if isinstance(self.previous_sibling(), transition):
             messages.append(
                 '<transition> may not directly follow another transition.')
+        i = self.parent.index(self)
+        prev_siblings = self.parent[:i]
+        if not [sibling for sibling in prev_siblings
+                if not isinstance(sibling, self.ignored_siblings)]:
+            messages.append(
+                '<transition> may not begin a section or document.')
+        next_siblings = self.parent[i+1:]
+        if not [sibling for sibling in next_siblings
+                if not isinstance(sibling, self.ignored_siblings)]:
+            messages.append('<transition> may not end a section or document.')
         if len(messages) > 1:
             raise ValidationError('\n  '.join(messages),
                                   problematic_element=self)

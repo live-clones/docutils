@@ -818,26 +818,36 @@ class ElementValidationTests(unittest.TestCase):
 
     def test_validate_content_transition(self):
         """Test additional constraints on <transition> placement:
-           Not at begin or end of a section or document,
+           Not at begin or end of section or document text,
            not after another transition.
         """
         transition = nodes.transition()
+        comment = nodes.comment()
         paragraph = nodes.paragraph()
-        section = nodes.section('', nodes.title(), transition, paragraph)
+        subdef = nodes.substitution_definition()
+        target = nodes.target()
+        title = nodes.title()
+
+        section = nodes.section('', title, comment, transition, paragraph)
+        self.assertEqual(section.validate_content(), [])
+        section = nodes.section('', title, subdef, transition, target, subdef)
         with self.assertRaisesRegex(nodes.ValidationError,
-                                    '<transition> may not begin a section '):
-            section.validate_content()
-        section = nodes.section('', nodes.title(), paragraph, transition)
-        with self.assertRaisesRegex(nodes.ValidationError,
-                                    '<transition> may not end a section '):
-            section.validate_content()
-        section = nodes.section('', nodes.title(), paragraph,
-                                nodes.transition(), transition)
+                                    '<transition> may not begin a section .*\n'
+                                    '  <transition> may not end a section '):
+            self.assertEqual(section.validate_content(), [])
+        section = nodes.section('', title, paragraph, transition,
+                                nodes.transition(), paragraph)
         with self.assertRaisesRegex(nodes.ValidationError,
                                     'Element <section> invalid:\n'
-                                    '  <transition> may not end .*\n'
-                                    '  <transition> may not directly '):
-            section.validate_content()
+                                    '  <transition> may not directly follow'):
+            self.assertEqual(section.validate_content(), [])
+
+        document = utils.new_document('test')
+        document.extend([nodes.decoration(), transition, nodes.meta()])
+        with self.assertRaisesRegex(nodes.ValidationError,
+                                    '<transition> may not begin a section .*\n'
+                                    '  <transition> may not end a section '):
+            self.assertEqual(section.validate_content(), [])
 
 
 class MiscTests(unittest.TestCase):

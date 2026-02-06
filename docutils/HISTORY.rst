@@ -21,6 +21,13 @@ Release 0.23b.dev (unpublished)
 
   - Apply patch #216 by Dmitry Shachnev: fix type annotations.
 
+* docutils/nodes.py
+
+  - `transition.validate_position()` now checks all siblings (not just
+    neighbours and also ignores <pending>, <substitution_definition>, and
+    <target> elements when testing for a <transition> at the begin or end
+    of a <section> or the <document>.
+
 * docutils/parsers/rst/directives/body.py
 
   - Add source and line info to <rubric> elements.
