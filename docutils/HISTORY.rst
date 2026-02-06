@@ -55,6 +55,11 @@ Release 0.23b.dev (unpublished)
   - Add source and line info to <table> elements.
   - Fix bug #517: wrong "input_offset" when parsing table cell content.
 
+* docutils/transforms/misc.py:
+
+  - Use `nodes.transition.validate_position() to warn about transitions
+    at the beginning or end of the document or a section.
+
 * docutils/writers/html5_polyglot/__init__.py
 
   - Use a section's last "ids" attribute for the "section-self-link".
@@ -308,9 +313,8 @@ Release 0.22 (2025-07-29)
 
 * docutils/transforms/misc.py:
 
-  - Fix for `misc.Transitions`: report an error if a <transition> element
-    follows a <meta> or <decoration> element as this is invalid
-    according to ``docutils.dtd``.
+  - Warn, if a <transition> element follows a <meta> or <decoration>
+    element as this is invalid according to ``docutils.dtd``.
 
 * docutils/transforms/references.py
 

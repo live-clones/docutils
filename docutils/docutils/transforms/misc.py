@@ -62,11 +62,13 @@ class ClassAttribute(Transform):
 
 
 class Transitions(Transform):
-
     """
-    Move transitions at the end of sections up the tree.  Complain
-    on transitions after a title, subtitle, meta, or decoration element,
-    at the beginning or end of the document, and after another transition.
+    Post-process <transition> elements.
+
+    Move transitions at the end of sections up the tree.
+    Warn on transitions at the beginning or end of the document or
+    a section (ignoring title, decoration, or invisible elements),
+    and after another transition.
 
     For example, transform this::
 
@@ -92,52 +94,38 @@ class Transitions(Transform):
             self.visit_transition(node)
 
     def visit_transition(self, node) -> None:
-        index = node.parent.index(node)
-        previous_sibling = node.previous_sibling()
         msg = ''
         if not isinstance(node.parent, (nodes.document, nodes.section)):
-            msg = 'Transition must be child of <document> or <section>.'
-        elif index == 0 or isinstance(previous_sibling, (nodes.title,
-                                                         nodes.subtitle,
-                                                         nodes.meta,
-                                                         nodes.decoration)):
-            msg = 'Document or section may not begin with a transition.'
-        elif isinstance(previous_sibling, nodes.transition):
-            msg = ('At least one body element must separate transitions; '
-                   'adjacent transitions are not allowed.')
-        if msg:
-            warning = self.document.reporter.warning(msg, base_node=node)
-            # Check, if it is valid to insert a body element
-            node.parent[index] = nodes.paragraph()
+            self.warn('Transition only valid as child of <document> '
+                      'or <section>.', node)
+        else:
             try:
-                node.parent.validate(recursive=False)
-            except nodes.ValidationError:
-                node.parent[index] = node
+                node.validate_position()
+            except nodes.ValidationError as e:
+                msg = str(e)
+        if 'may not end' in msg:
+            # Move transition up the tree.
+            sibling = node.parent  # get new predecessor node
+            parent = sibling.parent
+            while parent is not None:
+                index = parent.index(sibling)
+                if index < len(parent) - 1:
+                    node.parent.remove(node)
+                    parent.insert(index + 1, node)
+                    break
+                sibling = sibling.parent
+                parent = sibling.parent
             else:
-                node.parent[index] = node
-                node.parent.insert(index+1, warning)
-                index += 1
-        if not isinstance(node.parent, (nodes.document, nodes.section)):
-            return
-        assert index < len(node.parent)
-        if index != len(node.parent) - 1:
-            # No need to move the node.
-            return
-        # Node behind which the transition is to be moved.
-        sibling = node
-        # While sibling is the last node of its parent.
-        while index == len(sibling.parent) - 1:
-            sibling = sibling.parent
-            if sibling.parent is None:  # sibling is the top node (document)
-                # Transition at the end of document.  Do not move the
-                # transition up, and place a warning behind.
-                warning = self.document.reporter.warning(
-                              'Document may not end with a transition.',
-                              base_node=node)
-                node.parent.append(warning)
-                return
-            index = sibling.parent.index(sibling)
-        # Remove the original transition node.
-        node.parent.remove(node)
-        # Insert the transition after the sibling.
-        sibling.parent.insert(index + 1, node)
+                self.warn('Transition at the end of the document.', node)
+        if 'may not begin' in msg:
+            self.warn(f'Transition at the start of the {node.parent.tagname}.',
+                      node)
+        elif 'may not directly follow' in msg:
+            self.warn('At least one body element should separate transitions.',
+                      node)
+
+    def warn(self, msg, node) -> None:
+        # create a warning message, insert it if valid
+        warning = self.document.reporter.warning(msg, base_node=node)
+        if 'nodes.Body' in repr(node.parent.content_model):
+            node.parent.insert(node.parent.index(node)+1, warning)
