@@ -1550,6 +1550,144 @@ class PureTextElement(TextElement):
 #
 # See https://docutils.sourceforge.io/docs/ref/doctree.html#element-reference
 
+# Special purpose elements
+# ========================
+#
+# Body elements for internal use or special requests.
+
+class comment(Invisible, FixedTextElement, PureTextElement):
+    """Author notes, hidden from the output."""
+
+
+class substitution_definition(Invisible, TextElement):
+    valid_attributes: Final = Element.valid_attributes + ('ltrim', 'rtrim')
+
+
+class target(Invisible, Inline, TextElement, Targetable):
+    valid_attributes: Final = Element.valid_attributes + (
+        'anonymous', 'refid', 'refname', 'refuri')
+
+
+class system_message(Special, BackLinkable, PreBibliographic, Element):
+    """
+    System message element.
+
+    Do not instantiate this class directly; use
+    ``document.reporter.info/warning/error/severe()`` instead.
+    """
+    valid_attributes: Final = BackLinkable.valid_attributes + (
+                           'level', 'line', 'type')
+    content_model: Final = ((Body, '+'),)  # (%body.elements;)+
+
+    def __init__(self,
+                 message: str | None = None,
+                 *children,
+                 **attributes: Any,
+                 ) -> None:
+        rawsource = attributes.pop('rawsource', '')
+        if message:
+            p = paragraph('', message)
+            children = (p,) + children
+        try:
+            Element.__init__(self, rawsource, *children, **attributes)
+        except:  # NoQA: E722 (catchall)
+            print('system_message: children=%r' % (children,))
+            raise
+
+    def astext(self) -> str:
+        line = self.get('line', '')
+        return '%s:%s: (%s/%s) %s' % (self['source'], line, self['type'],
+                                      self['level'], Element.astext(self))
+
+
+class pending(Invisible, Element):
+    """
+    Placeholder for pending operations.
+
+    The "pending" element is used to encapsulate a pending operation: the
+    operation (transform), the point at which to apply it, and any data it
+    requires.  Only the pending operation's location within the document is
+    stored in the public document tree (by the "pending" object itself); the
+    operation and its data are stored in the "pending" object's internal
+    instance attributes.
+
+    For example, say you want a table of contents in your reStructuredText
+    document.  The easiest way to specify where to put it is from within the
+    document, with a directive::
+
+        .. contents::
+
+    But the "contents" directive can't do its work until the entire document
+    has been parsed and possibly transformed to some extent.  So the directive
+    code leaves a placeholder behind that will trigger the second phase of its
+    processing, something like this::
+
+        <pending ...public attributes...> + internal attributes
+
+    Use `document.note_pending()` so that the
+    `docutils.transforms.Transformer` stage of processing can run all pending
+    transforms.
+    """
+
+    def __init__(self,
+                 transform: Transform,
+                 details: Mapping[str, Any] | None = None,
+                 rawsource: str = '',
+                 *children,
+                 **attributes: Any,
+                 ) -> None:
+        Element.__init__(self, rawsource, *children, **attributes)
+
+        self.transform: Transform = transform
+        """The `docutils.transforms.Transform` class implementing the pending
+        operation."""
+
+        self.details: Mapping[str, Any] = details or {}
+        """Detail data (dictionary) required by the pending operation."""
+
+    def pformat(self, indent: str = '    ', level: int = 0) -> str:
+        internals = ['.. internal attributes:',
+                     '     .transform: %s.%s' % (self.transform.__module__,
+                                                 self.transform.__name__),
+                     '     .details:']
+        details = sorted(self.details.items())
+        for key, value in details:
+            if isinstance(value, Node):
+                internals.append('%7s%s:' % ('', key))
+                internals.extend(['%9s%s' % ('', line)
+                                  for line in value.pformat().splitlines()])
+            elif (value
+                  and isinstance(value, list)
+                  and isinstance(value[0], Node)):
+                internals.append('%7s%s:' % ('', key))
+                for v in value:
+                    internals.extend(['%9s%s' % ('', line)
+                                      for line in v.pformat().splitlines()])
+            else:
+                internals.append('%7s%s: %r' % ('', key, value))
+        return (Element.pformat(self, indent, level)
+                + ''.join(('    %s%s\n' % (indent * level, line))
+                          for line in internals))
+
+    def copy(self) -> Self:
+        obj = self.__class__(self.transform, self.details, self.rawsource,
+                             **self.attributes)
+        obj._document = self._document
+        obj.source = self.source
+        obj.line = self.line
+        return obj
+
+
+class raw(Special, Inline, PreBibliographic,
+          FixedTextElement, PureTextElement):
+    """Raw data that is to be passed untouched to the Writer.
+
+    Can be used as Body element or Inline element.
+    """
+    valid_attributes: Final = Element.valid_attributes + (
+        'format', 'xml:space')
+
+
 # Decorative Elements
 # ===================
 
@@ -2468,143 +2606,6 @@ class table(General, Element):
         'align', 'colsep', 'frame', 'pgwide', 'rowsep', 'width')
     content_model: Final = ((title, '?'), (tgroup, '+'))
     # (title?, tgroup+)
-
-
-# Special purpose elements
-# ------------------------
-# Body elements for internal use or special requests.
-
-class comment(Invisible, FixedTextElement, PureTextElement):
-    """Author notes, hidden from the output."""
-
-
-class substitution_definition(Invisible, TextElement):
-    valid_attributes: Final = Element.valid_attributes + ('ltrim', 'rtrim')
-
-
-class target(Invisible, Inline, TextElement, Targetable):
-    valid_attributes: Final = Element.valid_attributes + (
-        'anonymous', 'refid', 'refname', 'refuri')
-
-
-class system_message(Special, BackLinkable, PreBibliographic, Element):
-    """
-    System message element.
-
-    Do not instantiate this class directly; use
-    ``document.reporter.info/warning/error/severe()`` instead.
-    """
-    valid_attributes: Final = BackLinkable.valid_attributes + (
-                           'level', 'line', 'type')
-    content_model: Final = ((Body, '+'),)  # (%body.elements;)+
-
-    def __init__(self,
-                 message: str | None = None,
-                 *children,
-                 **attributes: Any,
-                 ) -> None:
-        rawsource = attributes.pop('rawsource', '')
-        if message:
-            p = paragraph('', message)
-            children = (p,) + children
-        try:
-            Element.__init__(self, rawsource, *children, **attributes)
-        except:  # NoQA: E722 (catchall)
-            print('system_message: children=%r' % (children,))
-            raise
-
-    def astext(self) -> str:
-        line = self.get('line', '')
-        return '%s:%s: (%s/%s) %s' % (self['source'], line, self['type'],
-                                      self['level'], Element.astext(self))
-
-
-class pending(Invisible, Element):
-    """
-    Placeholder for pending operations.
-
-    The "pending" element is used to encapsulate a pending operation: the
-    operation (transform), the point at which to apply it, and any data it
-    requires.  Only the pending operation's location within the document is
-    stored in the public document tree (by the "pending" object itself); the
-    operation and its data are stored in the "pending" object's internal
-    instance attributes.
-
-    For example, say you want a table of contents in your reStructuredText
-    document.  The easiest way to specify where to put it is from within the
-    document, with a directive::
-
-        .. contents::
-
-    But the "contents" directive can't do its work until the entire document
-    has been parsed and possibly transformed to some extent.  So the directive
-    code leaves a placeholder behind that will trigger the second phase of its
-    processing, something like this::
-
-        <pending ...public attributes...> + internal attributes
-
-    Use `document.note_pending()` so that the
-    `docutils.transforms.Transformer` stage of processing can run all pending
-    transforms.
-    """
-
-    def __init__(self,
-                 transform: Transform,
-                 details: Mapping[str, Any] | None = None,
-                 rawsource: str = '',
-                 *children,
-                 **attributes: Any,
-                 ) -> None:
-        Element.__init__(self, rawsource, *children, **attributes)
-
-        self.transform: Transform = transform
-        """The `docutils.transforms.Transform` class implementing the pending
-        operation."""
-
-        self.details: Mapping[str, Any] = details or {}
-        """Detail data (dictionary) required by the pending operation."""
-
-    def pformat(self, indent: str = '    ', level: int = 0) -> str:
-        internals = ['.. internal attributes:',
-                     '     .transform: %s.%s' % (self.transform.__module__,
-                                                 self.transform.__name__),
-                     '     .details:']
-        details = sorted(self.details.items())
-        for key, value in details:
-            if isinstance(value, Node):
-                internals.append('%7s%s:' % ('', key))
-                internals.extend(['%9s%s' % ('', line)
-                                  for line in value.pformat().splitlines()])
-            elif (value
-                  and isinstance(value, list)
-                  and isinstance(value[0], Node)):
-                internals.append('%7s%s:' % ('', key))
-                for v in value:
-                    internals.extend(['%9s%s' % ('', line)
-                                      for line in v.pformat().splitlines()])
-            else:
-                internals.append('%7s%s: %r' % ('', key, value))
-        return (Element.pformat(self, indent, level)
-                + ''.join(('    %s%s\n' % (indent * level, line))
-                          for line in internals))
-
-    def copy(self) -> Self:
-        obj = self.__class__(self.transform, self.details, self.rawsource,
-                             **self.attributes)
-        obj._document = self._document
-        obj.source = self.source
-        obj.line = self.line
-        return obj
-
-
-class raw(Special, Inline, PreBibliographic,
-          FixedTextElement, PureTextElement):
-    """Raw data that is to be passed untouched to the Writer.
-
-    Can be used as Body element or Inline element.
-    """
-    valid_attributes: Final = Element.valid_attributes + (
-        'format', 'xml:space')
 
 
 # Inline Elements
