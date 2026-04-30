@@ -1018,12 +1018,6 @@ Footnotes may be numbered, either manually or
 automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
 label so it can be referred to from multiple places, both as a
 footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
-}%
-\refstepcounter{footnote}\footnotetext{\label{label}%
-Footnotes may be numbered, either manually or
-automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
-label so it can be referred to from multiple places, both as a
-footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
 }, or symbolic\footnote{\label{footnote-3}%
 With \textquotedbl{}latex-footnotes\textquotedbl{}, symbolic footnotes and numbered footnotes
 are merged, the choice of symbol vs. number is done by LaTeX styling.

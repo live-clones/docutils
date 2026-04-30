@@ -2408,22 +2408,23 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                 # footnote is already set, just insert a reference:
                 self.out.append(r'\footref{%s}' % href)
                 raise nodes.SkipNode
-            self.footnote_queue.append(href)
-            if len(self.footnote_queue) > 1:
+            if self.footnote_queue:
                 # nested footnote: insert reference now and text later
                 self.out.append(r'\footref{%s}' % href)
+                self.footnote_queue.append(href)
                 raise nodes.SkipNode
-            # if we reach this point, the first queue item is a top level note
+            # node refers to a new top-level footnote:
             footnote_cmd = r'\footnote'
+            self.footnote_queue.append(href)
             while self.footnote_queue:
                 ID = self.footnote_queue[0]
                 footnote = self.document.ids[ID]
+                self.processed_footnotes.add(ID)  # keep ID for re-references
                 self.out += [footnote_cmd, r'{\label{', ID, '}%']
                 footnote.walkabout(self)  # visit/depart footnote & content
                 self.out.append('}')
-                # update queue, keep ID in case the note is referred to again
-                self.processed_footnotes.add(self.footnote_queue.pop(0))
-                # remaining items have the footnote-reference already set:
+                self.footnote_queue.pop(0)
+                # next items are nested notes (reference already set):
                 footnote_cmd = '%\n\\refstepcounter{footnote}\\footnotetext'
             raise nodes.SkipNode  # ignore content (footnote number/symbol)
 
