@@ -1382,8 +1382,10 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                            for path in stylesheet_list]
 
         # PDF setup
+        self.hyperref_options = []
         # avoid warnings about empty anchors with \DUfootnotetext:
-        self.hyperref_options = ['hyperfootnotes=false']
+        if self.docutils_footnotes:
+            self.hyperref_options = ['hyperfootnotes=false']
         # link color (default is "blue"):
         if self.hyperlink_color.lower() not in ('0', 'off', 'no', 'false', ''):
             self.hyperref_options.append('colorlinks=true,'
@@ -2379,6 +2381,8 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             if len(node) > 1 and isinstance(node[1], nodes.paragraph):
                 self.out.append('%')
         elif not self.footnote_queues:
+            # latex-footnotes: set only scheduled footnotes
+            # (see `visit_footnote_reference()`)
             raise nodes.SkipNode
 
     def depart_footnote(self, node) -> None:
@@ -2386,11 +2390,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             self.out.append('}\n')
 
     def visit_footnote_reference(self, node) -> None:
-        href = ''
-        if 'refid' in node:
-            href = node['refid']
-        elif 'refname' in node:
-            href = self.document.nameids[node['refname']]
+        href = node['refid']
         if self.docutils_footnotes:
             format = self.settings.footnote_references
             if format == 'brackets':
@@ -2403,22 +2403,13 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                 self.out.append(r'\DUfootnotemark{%s}{%s}{' %
                                 (node['ids'][0], href))
                 self.context.append('}')
-        else:
-            footnotes = (self.document.footnotes
-                         + self.document.autofootnotes
-                         + self.document.symbol_footnotes)
-            for footnote in footnotes:
-                if href in footnote['ids']:
-                    self.footnote_queues.append([])
-                    self.push_output_collector([])
-                    footnote.walkabout(self)
-                    text = ''.join(self.out)
-                    self.pop_output_collector()
-                    break
-            else:
-                self.document.reporter.error(
-                    "Footnote %s referenced but not found" % href)
-                raise nodes.SkipNode
+        else:  # latex-footnotes
+            footnote = self.document.ids[href]
+            # write footnote content into string `text`
+            self.footnote_queues.append([])
+            self.push_output_collector([])
+            footnote.walkabout(self)
+            text = ''.join(self.pop_output_collector())
             queued = self.footnote_queues.pop()
             if not self.footnote_queues:
                 self.out.append("\\footnote{%")
@@ -2433,6 +2424,10 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                 self.footnote_queues[-1].append(text)
                 self.footnote_queues[-1].extend(queued)
             raise nodes.SkipNode
+            # TODO:
+            # * Prepend a label if the footnote is an explicit target.
+            # * use \footref (part of LaTeX since 2021-05-01)
+            #   for multiple refs to the same footnote.
 
     def depart_footnote_reference(self, node) -> None:
         self.out.append(self.context.pop())
