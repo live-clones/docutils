@@ -245,5 +245,4 @@ LaTeX-Specific Options
 --new-column-widths     Use new algorithm to determine table column widths.
                         (future default)
 --docutils-footnotes    Footnotes with numbers/symbols by Docutils. (default)
-                        (The alternative, --latex-footnotes, is not
-                        implemented yet.)
+--latex-footnotes       Footnotes with numbers by LaTeX.

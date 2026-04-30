@@ -226,12 +226,15 @@ class Writer(writers.Writer):
           {'dest': 'legacy_column_widths',
            'action': 'store_false',
            'validator': frontend.validate_boolean}),
-         # TODO: implement "latex footnotes" alternative
-         ('Footnotes with numbers/symbols by Docutils. (default) '
-          '(The alternative, --latex-footnotes, is not implemented yet.)',
+         ('Footnotes with numbers/symbols by Docutils. (default)',
           ['--docutils-footnotes'],
           {'default': True,
            'action': 'store_true',
+           'validator': frontend.validate_boolean}),
+         ('Footnotes with numbers by LaTeX.',
+          ['--latex-footnotes'],
+          {'dest': 'docutils_footnotes',
+           'action': 'store_false',
            'validator': frontend.validate_boolean}),
          ),
         )
@@ -1260,7 +1263,6 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         else:
             self.graphicx_package = (r'\usepackage[%s]{graphicx}' %
                                      settings.graphicx_option)
-        # footnotes: TODO: implement LaTeX footnotes
         self.docutils_footnotes = settings.docutils_footnotes
 
         # Output collection stacks
@@ -1324,6 +1326,15 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         # Where to collect the output of visitor methods (default: body)
         self.out = self.body
         self.out_stack = []  # stack of output collectors
+
+        # Texts of nested footnotes to emit once we finish the topmost
+        # footnote.  footnote_queues[i] contains the text of footnotes
+        # encountered while processing the current footnote (which is nested
+        # within `i` higher footnotes).  If i == 0, they will be emitted
+        # immediately after the current footnote ends; if i > 0; they will be
+        # added to footnote_queues[i-1] after ending the current footnote,
+        # which is added to the same queue before them.
+        self.footnote_queues = []
 
         # Process settings
         # ~~~~~~~~~~~~~~~~
@@ -2353,11 +2364,11 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         self.pop_output_collector()
 
     def visit_footnote(self, node) -> None:
-        try:
-            backref = node['backrefs'][0]
-        except IndexError:
-            backref = node['ids'][0]  # no backref, use self-ref instead
         if self.docutils_footnotes:
+            try:
+                backref = node['backrefs'][0]
+            except IndexError:
+                backref = node['ids'][0]  # no backref, use self-ref instead
             self.provide_fallback('footnotes')
             num = node[0].astext()
             if self.settings.footnote_references == 'brackets':
@@ -2367,10 +2378,12 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             # prevent spurious whitespace if footnote starts with paragraph:
             if len(node) > 1 and isinstance(node[1], nodes.paragraph):
                 self.out.append('%')
-        # TODO: "real" LaTeX \footnote{}s (see visit_footnotes_reference())
+        elif not self.footnote_queues:
+            raise nodes.SkipNode
 
     def depart_footnote(self, node) -> None:
-        self.out.append('}\n')
+        if self.docutils_footnotes:
+            self.out.append('}\n')
 
     def visit_footnote_reference(self, node) -> None:
         href = ''
@@ -2378,25 +2391,48 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             href = node['refid']
         elif 'refname' in node:
             href = self.document.nameids[node['refname']]
-        # if not self.docutils_footnotes:
-        #     # TODO: insert footnote content at (or near) this place
-        #     #       see also docs/dev/todo.rst
-        #     try:
-        #         referenced_node = self.document.ids[node['refid']]
-        #     except (AttributeError, KeyError):
-        #         self.document.reporter.error(
-        #             'unresolved footnote-reference %s' % node)
-        #     print('footnote-ref to %s' % referenced_node)
-        format = self.settings.footnote_references
-        if format == 'brackets':
-            self.append_hypertargets(node)
-            self.out.append('\\hyperlink{%s}{[' % href)
-            self.context.append(']}')
+        if self.docutils_footnotes:
+            format = self.settings.footnote_references
+            if format == 'brackets':
+                self.append_hypertargets(node)
+                self.out.append('\\hyperlink{%s}{[' % href)
+                self.context.append(']}')
+            else:
+                if not self.fallback_stylesheet:
+                    self.fallbacks['footnotes'] = PreambleCmds.footnotes
+                self.out.append(r'\DUfootnotemark{%s}{%s}{' %
+                                (node['ids'][0], href))
+                self.context.append('}')
         else:
-            self.provide_fallback('footnotes')
-            self.out.append(r'\DUfootnotemark{%s}{%s}{' %
-                            (node['ids'][0], href))
-            self.context.append('}')
+            footnotes = (self.document.footnotes
+                         + self.document.autofootnotes
+                         + self.document.symbol_footnotes)
+            for footnote in footnotes:
+                if href in footnote['ids']:
+                    self.footnote_queues.append([])
+                    self.push_output_collector([])
+                    footnote.walkabout(self)
+                    text = ''.join(self.out)
+                    self.pop_output_collector()
+                    break
+            else:
+                self.document.reporter.error(
+                    "Footnote %s referenced but not found" % href)
+                raise nodes.SkipNode
+            queued = self.footnote_queues.pop()
+            if not self.footnote_queues:
+                self.out.append("\\footnote{%")
+                self.out.append(text)
+                self.out.append("}")
+                for fn in queued:
+                    self.out.append("\\footnotetext{%")
+                    self.out.append(fn)
+                    self.out.append("}")
+            else:
+                self.out.append("\\footnotemark{}")
+                self.footnote_queues[-1].append(text)
+                self.footnote_queues[-1].extend(queued)
+            raise nodes.SkipNode
 
     def depart_footnote_reference(self, node) -> None:
         self.out.append(self.context.pop())

@@ -984,5 +984,100 @@ We can also write a hyperlink to \hyperref[multi]{multi}.
 ])
 
 
+samples['latex-footnotes'] = ({'docutils_footnotes': False}, [
+# simple
+["""\
+Paragraphs contain text and may contain footnote references (manually
+numbered [1]_, anonymous auto-numbered [#]_, labeled auto-numbered
+[#label]_, or symbolic [*]_).
+
+.. [1] A footnote contains body elements, consistently indented by at
+   least 3 spaces.
+
+   This is the footnote's second paragraph.
+
+.. [#label] Footnotes may be numbered, either manually or
+   automatically using a "#"-prefixed label.  This footnote has a
+   label so it can be referred to from multiple places, both as a
+   footnote reference and as a hyperlink reference.
+
+.. [#] This footnote is numbered automatically and anonymously using a
+   label of "#" only.
+
+.. [*] Footnotes may also use symbols, specified with a "*" label.
+""",
+r"""
+Paragraphs contain text and may contain footnote references (manually
+numbered\footnote{%
+A footnote contains body elements, consistently indented by at
+least 3 spaces.
+
+This is the footnote's second paragraph.
+}, anonymous auto-numbered\footnote{%
+This footnote is numbered automatically and anonymously using a
+label of \textquotedbl{}\#\textquotedbl{} only.
+}, labeled auto-numbered\footnote{%
+Footnotes may be numbered, either manually or
+automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
+label so it can be referred to from multiple places, both as a
+footnote reference and as a hyperlink reference.
+}, or symbolic\footnote{%
+Footnotes may also use symbols, specified with a \textquotedbl{}*\textquotedbl{} label.
+}).
+"""],
+# nested
+["""\
+It's possible to produce nested footnotes in LaTeX. [#]_
+
+.. [#] It takes some work, though. [#]_
+.. [#] And don't even get me started on how tricky recursive footnotes would be.
+""",
+r"""
+It's possible to produce nested footnotes in LaTeX.\footnote{%
+It takes some work, though.\footnotemark{}
+}\footnotetext{%
+And don't even get me started on how tricky recursive footnotes would be.
+}
+"""],
+# chained
+["""\
+It's possible to produce chained footnotes in LaTeX. [#]_
+
+.. [#] They're just a special case of nested footnotes. [#]_
+.. [#] A nested footnote is a footnote on a footnote. [#]_
+.. [#] This is a footnote on a footnote on a footnote.
+""",
+r"""
+It's possible to produce chained footnotes in LaTeX.\footnote{%
+They're just a special case of nested footnotes.\footnotemark{}
+}\footnotetext{%
+A nested footnote is a footnote on a footnote.\footnotemark{}
+}\footnotetext{%
+This is a footnote on a footnote on a footnote.
+}
+"""],
+# multinested
+["""\
+LaTeX isn't the best at nested footnote support. [#]_
+
+.. [#] Specifically, it gets the numbers wrong [#]_ for "multinested"
+   footnotes. [#]_
+.. [#] For example, this should be footnote 2, but both it and the next one
+   show up as footnote 3.
+.. [#] That's a footnote that contains more than one footnote of its own.
+""",
+r"""
+LaTeX isn't the best at nested footnote support.\footnote{%
+Specifically, it gets the numbers wrong\footnotemark{} for \textquotedbl{}multinested\textquotedbl{}
+footnotes.\footnotemark{}
+}\footnotetext{%
+For example, this should be footnote 2, but both it and the next one
+show up as footnote 3.
+}\footnotetext{%
+That's a footnote that contains more than one footnote of its own.
+}
+"""],
+])
+
 if __name__ == '__main__':
     unittest.main()
