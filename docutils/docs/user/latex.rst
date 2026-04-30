@@ -1089,10 +1089,11 @@ is handled by LaTeX:
   footnote reference.
 * There is no distinction between numbered footnotes and
   `symbol footnotes`_, by default all footnotes are numbered.
-* Footnote numbers depend on the order of the `footnote references`.
+* Footnotes are sorted and numbered in the order of the `footnote references`.
 * There is no backlink from footnote to footnote reference.
 
-.. important:: LaTeX footnotes `do not work in figures and table captions`__!
+.. important:: LaTeX footnotes `do not work in figures and table captions`__
+   nor in the box created by the "sidebar" directive!
 
 LaTeX offers a wide range of footnote configuration options
 (cf. the `LaTeX WikiBook`__ and the `TeX FAQ`__).

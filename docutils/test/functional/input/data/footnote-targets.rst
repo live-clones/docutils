@@ -1,5 +1,5 @@
-Test features of rST footnotes
-==============================
+Test features of rST footnotes [#top]_
+======================================
 
 *Numbered* footnotes [#exi]_ [#]_ [4]_ [#]_ may be referenced more than
 once and also via hyperlink references:
@@ -32,6 +32,7 @@ links to `*`_, `#`_ and `†`_.)
 .. [*] second auto-symbol
 .. [#] referenced from the first auto-symbol footnote
 .. [*] referenced from the first auto-symbol footnote, too
+.. [#top] referenced from a section title
 
 4
 ===

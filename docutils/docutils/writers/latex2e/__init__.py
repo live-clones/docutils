@@ -2416,6 +2416,8 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             # `target` is a new top-level footnote:
             self.footnote_queue.append(href)
             footnote_cmd = '%\n\\footnote'
+            if isinstance(node.parent, nodes.title):
+                footnote_cmd = '%\n \\protect\\footnote'
             add_label = target['names'] and self.document.refnames.get(
                                                 target['names'][0], [])
             while self.footnote_queue:
