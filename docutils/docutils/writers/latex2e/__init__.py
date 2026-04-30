@@ -228,13 +228,13 @@ class Writer(writers.Writer):
            'validator': frontend.validate_boolean}),
          ('Footnotes with numbers/symbols by Docutils. (default)',
           ['--docutils-footnotes'],
-          {'default': True,
-           'action': 'store_true',
+          {'dest': 'latex_footnotes',
+           'action': 'store_false',
            'validator': frontend.validate_boolean}),
          ('Footnotes with numbers by LaTeX.',
           ['--latex-footnotes'],
-          {'dest': 'docutils_footnotes',
-           'action': 'store_false',
+          {'action': 'store_true',
+           'default': False,
            'validator': frontend.validate_boolean}),
          ),
         )
@@ -1263,7 +1263,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         else:
             self.graphicx_package = (r'\usepackage[%s]{graphicx}' %
                                      settings.graphicx_option)
-        self.docutils_footnotes = settings.docutils_footnotes
+        self.latex_footnotes = settings.latex_footnotes
 
         # Output collection stacks
         # ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1379,7 +1379,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         # PDF setup
         self.hyperref_options = []
         # avoid warnings about empty anchors with \DUfootnotetext:
-        if self.docutils_footnotes:
+        if not self.latex_footnotes:
             self.hyperref_options = ['hyperfootnotes=false']
         # link color (default is "blue"):
         if self.hyperlink_color.lower() not in ('0', 'off', 'no', 'false', ''):
@@ -2361,7 +2361,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         self.pop_output_collector()
 
     def visit_footnote(self, node) -> None:
-        if self.docutils_footnotes:
+        if not self.latex_footnotes:
             try:
                 backref = node['backrefs'][0]
             except IndexError:
@@ -2381,12 +2381,12 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             raise nodes.SkipNode
 
     def depart_footnote(self, node) -> None:
-        if self.docutils_footnotes:
+        if not self.latex_footnotes:
             self.out.append('}\n')
 
     def visit_footnote_reference(self, node) -> None:
         href = node['refid']
-        if self.docutils_footnotes:
+        if not self.latex_footnotes:
             format = self.settings.footnote_references
             if format == 'brackets':
                 self.append_hypertargets(node)
@@ -2441,7 +2441,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             raise nodes.SkipNode  # ignore content (footnote number/symbol)
 
     def depart_footnote_reference(self, node) -> None:
-        if self.docutils_footnotes:
+        if not self.latex_footnotes:
             self.out.append(self.context.pop())
         elif not isinstance(self.document.ids[node['refid']], nodes.footnote):
             self.depart_reference(node)

@@ -92,6 +92,7 @@ Release 0.23b.dev (unpublished)
     implicit targets if there is no matching reference in the document.
   - Default styling for "semantic inline markup roles"
     (cf. ``html-roles.txt`` standard definition file).
+  - Implement the latex_footnotes_ configuration setting.
 
 
 Release 0.22.4 (2025-12-18)
@@ -4868,6 +4869,7 @@ test/test_rst); and all modifications required to make it all work.
 .. _input_encoding: docs/user/config.html#input-encoding
 .. _input_encoding_error_handler: docs/user/config.html#input-encoding-error-handler
 .. _language: docs/user/config.html#language
+.. _latex_footnotes: docs/user/config.html#latex-footnotes
 .. _latex_preamble: docs/user/config.html#latex-preamble
 .. _legacy_class_functions: docs/user/config.html#legacy-class-functions
 .. _legacy_ids: docs/user/config.html#legacy-ids

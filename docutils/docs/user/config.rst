@@ -1700,16 +1700,6 @@ commas.
 *Default*: "a4paper".  *Option*: ``--documentoptions``.
 
 
-docutils_footnotes
-~~~~~~~~~~~~~~~~~~
-Use the Docutils-specific macros ``\DUfootnote`` and
-``\DUfootnotetext`` for footnotes_.
-
-TODO: The alternative, "latex_footnotes" is not implemented yet.
-
-*Default*: True.  *Option*: ``--docutils-footnotes``.
-
-
 .. _embed_stylesheet [latex writers]:
 
 embed_stylesheet
@@ -1775,6 +1765,20 @@ is prepended.
 *Default*: "".   *Option*: ``--hyperref-options``.
 
 .. _hyperref TeX package: https://ctan.org/pkg/hyperref/
+
+
+latex_footnotes
+~~~~~~~~~~~~~~~
+
+Let LaTeX handle the numbering and placement of
+footnotes_ and `footnote references`_.
+For details, see "`how to configure the footnotes`_"
+in `Generating LaTeX with Docutils`.
+
+:Default: False (use footnote numbers/symbols appointed by Docutils).
+:Options: ``--latex-footnotes``, ``--docutils-footnotes``.
+
+New in Docutils 0.23.
 
 
 latex_preamble
@@ -2726,6 +2730,8 @@ If the first line matches the second line is ignored.
 .. _tables: ../ref/rst/restructuredtext.html#tables
 
 .. _Docutils HTML writers: html.html
+
+.. _How to configure the footnotes: latex.html#footnotes
 
 .. _application:
 .. _front-end tool:

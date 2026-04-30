@@ -984,7 +984,7 @@ We can also write a hyperlink to \hyperref[multi]{multi}.
 ])
 
 
-samples['latex-footnotes'] = ({'docutils_footnotes': False}, [
+samples['latex-footnotes'] = ({'latex_footnotes': True}, [
 # different markup variants
 [r"""
 Paragraphs contain text and may contain footnote references (manually

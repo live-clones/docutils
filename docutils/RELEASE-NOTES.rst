@@ -311,6 +311,9 @@ LaTeX writer:
 
 Configuration changes
   - New setting `legacy_ids`_.
+  - The new setting `latex_footnotes`_ replaces "docutils_footnotes"
+    (ignored since Docutils 0.13.1).  The command line option
+    ``--docutils-footnotes`` is kept and sets latex_footnotes_ to False.
 
 New objects
   `nodes.document.names`:
@@ -1291,7 +1294,7 @@ Components:
     into the margin).
   - Preserve runs of spaces in 'inline literals'.
   - Deprecate ``figure_footnotes`` setting.
-  - Rename ``use_latex_footnotes`` setting to `docutils_footnotes`__.
+  - Rename ``use_latex_footnotes`` setting to `docutils_footnotes`.
   - New ``latex_preamble`` setting.
   - Use PDF standard fonts (Times/Helvetica/Courier) as default.
   - `hyperref` package called with ``unicode`` option (see the
@@ -1299,7 +1302,6 @@ Components:
   - Drop the special `output_encoding`__ default ("latin-1").
     The Docutils wide default (usually "UTF-8") is used instead.
 
-  __ docs/user/config.html#docutils-footnotes
   __ docs/user/latex.html#hyperlinks
   __ docs/user/latex.html#output-encoding
 
@@ -1631,6 +1633,7 @@ Release 0.3.5 (2004-07-29)
 .. _initial_header_level: docs/user/config.html#initial-header-level
 .. _input_encoding: docs/user/config.html#input-encoding
 .. _[latex writers]: docs/user/config.html#latex-writers
+.. _latex_footnotes: docs/user/config.html#latex-footnotes
 .. _legacy_column_widths: docs/user/config.html#legacy-column-widths
 .. _legacy_ids: docs/user/config.html#legacy-ids
 .. _text_references: docs/user/config.html#text-references
