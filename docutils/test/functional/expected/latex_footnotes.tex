@@ -28,14 +28,18 @@
 
 \section{Test features of rST footnotes}
 
-\emph{Numbered} footnotes\footnote{\label{exi}%
-autonumber-label
-}\footnote{\label{footnote-2}%
-auto-numbered (skipping 2)
-}\footnote{\label{footnote-1}%
-manually numbered
-}\footnote{%
-second auto-numbered (skipping \hyperref[footnote-1]{4} and \hyperref[section-2]{5})
+\emph{Numbered} footnotes%
+\footnote{\label{exi}%
+  autonumber-label
+}%
+\footnote{\label{footnote-2}%
+  auto-numbered (skipping 2)
+}%
+\footnote{\label{footnote-1}%
+  manually numbered
+}%
+\footnote{%
+  second auto-numbered (skipping \hyperref[footnote-1]{4} and \hyperref[section-2]{5})
 } may be referenced more than
 once and also via hyperlink references:
 
@@ -53,16 +57,18 @@ Reference name is the auto-assigned number, \hyperref[footnote-2]{3}
 auto-numbered footnote is added or removed).
 \end{description}
 
-\emph{Symbol} footnotes\footnote{%
-auto-symbol with nested footnotes\footref{footnote-6}\footref{footnote-7}
+\emph{Symbol} footnotes%
+\footnote{%
+  auto-symbol with nested footnotes\footref{footnote-6}\footref{footnote-7}
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-6}%
-referenced from the first auto-symbol footnote
+  referenced from the first auto-symbol footnote
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-7}%
-referenced from the first auto-symbol footnote, too
-}\footnote{%
-second auto-symbol
+  referenced from the first auto-symbol footnote, too
+}%
+\footnote{%
+  second auto-symbol
 } do not have a reference name.
 They can only be referenced once and only with a footnote-reference.
 

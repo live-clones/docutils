@@ -2415,7 +2415,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                 raise nodes.SkipNode
             # `target` is a new top-level footnote:
             self.footnote_queue.append(href)
-            footnote_cmd = r'\footnote'
+            footnote_cmd = '%\n\\footnote'
             add_label = target['names'] and self.document.refnames.get(
                                                 target['names'][0], [])
             while self.footnote_queue:
@@ -2426,8 +2426,14 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                 if add_label:
                     self.out += [r'\label{', ID, '}']
                 self.out.append('%')
+                # get footnote content
+                self.push_output_collector([])
                 footnote.walkabout(self)  # visit/depart footnote & content
-                self.out.append('}')
+                note = ''.join(self.pop_output_collector())
+                # indent lines
+                note = '\n  '.join(note.splitlines())
+                self.out.append(note)
+                self.out.append('\n}')
                 self.footnote_queue.pop(0)
                 # subsequent items have their reference already set:
                 footnote_cmd = '%\n\\refstepcounter{footnote}\\footnotetext'

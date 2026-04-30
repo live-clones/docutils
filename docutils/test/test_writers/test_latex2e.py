@@ -1008,19 +1008,23 @@ numbered [1]_, anonymous auto-numbered [#]_, labeled auto-numbered
 """,
 r"""
 Paragraphs contain text and may contain footnote references (manually
-numbered\footnote{\label{footnote-1}%
-A footnote.
-}, anonymous auto-numbered\footnote{%
-This footnote is numbered automatically and anonymously using a
-label of \textquotedbl{}\#\textquotedbl{} only.
-}, labeled auto-numbered\footnote{\label{label}%
-Footnotes may be numbered, either manually or
-automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
-label so it can be referred to from multiple places, both as a
-footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
-}, or symbolic\footnote{%
-With \textquotedbl{}latex-footnotes\textquotedbl{}, symbolic footnotes and numbered footnotes
-are merged, the choice of symbol vs. number is done by LaTeX styling.
+numbered%
+\footnote{\label{footnote-1}%
+  A footnote.
+}, anonymous auto-numbered%
+\footnote{%
+  This footnote is numbered automatically and anonymously using a
+  label of \textquotedbl{}\#\textquotedbl{} only.
+}, labeled auto-numbered%
+\footnote{\label{label}%
+  Footnotes may be numbered, either manually or
+  automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
+  label so it can be referred to from multiple places, both as a
+  footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
+}, or symbolic%
+\footnote{%
+  With \textquotedbl{}latex-footnotes\textquotedbl{}, symbolic footnotes and numbered footnotes
+  are merged, the choice of symbol vs. number is done by LaTeX styling.
 }).
 """],
 # multi-nested footnotes
@@ -1042,30 +1046,32 @@ A second reference to the first one [#multi]_.
 We can also write a hyperlink to multi_.
 """,
 r"""
-A footnote\footnote{\label{multi}%
-This is a footnote with nested\footref{footnote-1} footnotes.\footref{footnote-2}\footref{footnote-3}
+A footnote%
+\footnote{\label{multi}%
+  This is a footnote with nested\footref{footnote-1} footnotes.\footref{footnote-2}\footref{footnote-3}
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-1}%
-First nested\footref{footnote-4} footnote.\footref{footnote-5}
+  First nested\footref{footnote-4} footnote.\footref{footnote-5}
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-2}%
-Second nested footnote.\footref{footnote-6}
+  Second nested footnote.\footref{footnote-6}
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-3}%
-Third nested footnote.
+  Third nested footnote.
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-4}%
-First double-nested footnote.
+  First double-nested footnote.
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-5}%
-Second double-nested footnote.
+  Second double-nested footnote.
 }%
 \refstepcounter{footnote}\footnotetext{\label{footnote-6}%
-First triple-nested footnote.
+  First triple-nested footnote.
 }
 
-Ref to a new footnote\footnote{%
-Not nested, referenced after footnote text.
+Ref to a new footnote%
+\footnote{%
+  Not nested, referenced after footnote text.
 }
 
 A second reference to the first one\footref{multi}.
