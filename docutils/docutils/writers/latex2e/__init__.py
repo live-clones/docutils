@@ -1327,14 +1327,9 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         self.out = self.body
         self.out_stack = []  # stack of output collectors
 
-        # Texts of nested footnotes to emit once we finish the topmost
-        # footnote.  footnote_queues[i] contains the text of footnotes
-        # encountered while processing the current footnote (which is nested
-        # within `i` higher footnotes).  If i == 0, they will be emitted
-        # immediately after the current footnote ends; if i > 0; they will be
-        # added to footnote_queues[i-1] after ending the current footnote,
-        # which is added to the same queue before them.
-        self.footnote_queues = []
+        # LaTeX footnotes (see `visit_footnote_reference()`)
+        self.footnote_queue = []  # FIFO queue of footnote IDs
+        self.processed_footnotes = set()  # IDs of already set footnotes
 
         # Process settings
         # ~~~~~~~~~~~~~~~~
@@ -2380,7 +2375,7 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             # prevent spurious whitespace if footnote starts with paragraph:
             if len(node) > 1 and isinstance(node[1], nodes.paragraph):
                 self.out.append('%')
-        elif not self.footnote_queues:
+        elif not self.footnote_queue:
             # latex-footnotes: set only scheduled footnotes
             # (see `visit_footnote_reference()`)
             raise nodes.SkipNode
@@ -2404,33 +2399,40 @@ class LaTeXTranslator(writers.DoctreeTranslator):
                                 (node['ids'][0], href))
                 self.context.append('}')
         else:  # latex-footnotes
-            footnote = self.document.ids[href]
-            # write footnote content into string `text`
-            self.footnote_queues.append([])
-            self.push_output_collector([])
-            footnote.walkabout(self)
-            text = ''.join(self.pop_output_collector())
-            queued = self.footnote_queues.pop()
-            if not self.footnote_queues:
-                self.out.append("\\footnote{%")
-                self.out.append(text)
-                self.out.append("}")
-                for fn in queued:
-                    self.out.append("\\footnotetext{%")
-                    self.out.append(fn)
-                    self.out.append("}")
-            else:
-                self.out.append("\\footnotemark{}")
-                self.footnote_queues[-1].append(text)
-                self.footnote_queues[-1].extend(queued)
-            raise nodes.SkipNode
-            # TODO:
-            # * Prepend a label if the footnote is an explicit target.
-            # * use \footref (part of LaTeX since 2021-05-01)
-            #   for multiple refs to the same footnote.
+            target = self.document.ids[href]
+            if not isinstance(target, nodes.footnote):
+                self.out.append(r'\textsuperscript{')
+                self.visit_reference(node)
+                return
+            if href in self.processed_footnotes:
+                # footnote is already set, just insert a reference:
+                self.out.append(r'\footref{%s}' % href)
+                raise nodes.SkipNode
+            self.footnote_queue.append(href)
+            if len(self.footnote_queue) > 1:
+                # nested footnote: insert reference now and text later
+                self.out.append(r'\footref{%s}' % href)
+                raise nodes.SkipNode
+            # if we reach this point, the first queue item is a top level note
+            footnote_cmd = r'\footnote'
+            while self.footnote_queue:
+                ID = self.footnote_queue[0]
+                footnote = self.document.ids[ID]
+                self.out += [footnote_cmd, r'{\label{', ID, '}%']
+                footnote.walkabout(self)  # visit/depart footnote & content
+                self.out.append('}')
+                # update queue, keep ID in case the note is referred to again
+                self.processed_footnotes.add(self.footnote_queue.pop(0))
+                # remaining items have the footnote-reference already set:
+                footnote_cmd = '%\n\\refstepcounter{footnote}\\footnotetext'
+            raise nodes.SkipNode  # ignore content (footnote number/symbol)
 
     def depart_footnote_reference(self, node) -> None:
-        self.out.append(self.context.pop())
+        if self.docutils_footnotes:
+            self.out.append(self.context.pop())
+        elif not isinstance(self.document.ids[node['refid']], nodes.footnote):
+            self.depart_reference(node)
+            self.out.append('}')
 
     # footnote/citation label
     def label_delim(self, node, bracket, superscript):

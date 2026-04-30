@@ -28,44 +28,40 @@
 
 \section{Test features of rST footnotes}
 
-\emph{Numbered} footnotes\footnote{%
+\emph{Numbered} footnotes\footnote{\label{exi}%
 autonumber-label
-}\footnote{%
+}\footnote{\label{footnote-2}%
 auto-numbered (skipping 2)
-}\footnote{%
+}\footnote{\label{footnote-1}%
 manually numbered
-}\footnote{%
+}\footnote{\label{footnote-3}%
 second auto-numbered (skipping \hyperref[footnote-1]{4} and \hyperref[section-2]{5})
 } may be referenced more than
 once and also via hyperlink references:
 
 \begin{description}
-\item[{autonumber label\footnote{%
-autonumber-label
-}}] 
+\item[{autonumber label\footref{exi}}] 
 Reference name is the \emph{label} (without \#),
 \hyperref[exi]{exi}, not the number (both \texttt{1\_} and \texttt{{[}1{]}\_} fail).
 
-\item[{manually numbered\footnote{%
-manually numbered
-}}] 
+\item[{manually numbered\footref{footnote-1}}] 
 Reference name is the specified number, \hyperref[footnote-1]{4}.
 
-\item[{auto-numbered\footnote{%
-auto-numbered (skipping 2)
-}}] 
+\item[{auto-numbered\footref{footnote-2}}] 
 Reference name is the auto-assigned number, \hyperref[footnote-2]{3}
 (caution: the assigned number may change if another
 auto-numbered footnote is added or removed).
 \end{description}
 
-\emph{Symbol} footnotes\footnote{%
-auto-symbol with nested footnotes\footnotemark{}\footnotemark{}
-}\footnotetext{%
+\emph{Symbol} footnotes\footnote{\label{footnote-4}%
+auto-symbol with nested footnotes\footref{footnote-6}\footref{footnote-7}
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-6}%
 referenced from the first auto-symbol footnote
-}\footnotetext{%
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-7}%
 referenced from the first auto-symbol footnote, too
-}\footnote{%
+}\footnote{\label{footnote-5}%
 second auto-symbol
 } do not have a reference name.
 They can only be referenced once and only with a footnote-reference.
@@ -82,12 +78,8 @@ links to \hyperref[target-1]{*}, \hyperref[target-2]{\#} and \hyperref[target-3]
 \section{4}
 
 An \emph{implicit} target with conflicting refname (like this section) is
-overwritten by manually numbered footnotes\footnote{%
-manually numbered
-} and footnotes with
-autonumber-label\footnote{%
-autonumber-label
-}. An INFO is generated.
+overwritten by manually numbered footnotes\footref{footnote-1} and footnotes with
+autonumber-label\footref{exi}. An INFO is generated.
 
 Hyperlink references to \hyperref[footnote-1]{4} and \hyperref[exi]{exi} point to the footnotes, not the
 sections.
@@ -108,7 +100,7 @@ Both, explicit and implicit targets with a number as reference name
 (e.g. the inline target \textquotedbl{}%
 \phantomsection\label{target-4}2\textquotedbl{} and the section title \textquotedbl{}5\textquotedbl{} above)
 cause a gap in footnote auto-numbering. The number can be used in a
-footnote-reference although it does not refer to a footnote!
+footnote-reference although it does not refer to a footnote!\textsuperscript{\hyperref[section-2]{5}}\textsuperscript{\hyperref[target-4]{2}}
 
 \begin{description}
 \item[{TODO:}] 

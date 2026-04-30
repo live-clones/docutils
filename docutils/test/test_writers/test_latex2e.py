@@ -985,97 +985,97 @@ We can also write a hyperlink to \hyperref[multi]{multi}.
 
 
 samples['latex-footnotes'] = ({'docutils_footnotes': False}, [
-# simple
-["""\
+# different markup variants
+[r"""
 Paragraphs contain text and may contain footnote references (manually
 numbered [1]_, anonymous auto-numbered [#]_, labeled auto-numbered
 [#label]_, or symbolic [*]_).
 
-.. [1] A footnote contains body elements, consistently indented by at
-   least 3 spaces.
-
-   This is the footnote's second paragraph.
+.. [1] A footnote.
 
 .. [#label] Footnotes may be numbered, either manually or
    automatically using a "#"-prefixed label.  This footnote has a
    label so it can be referred to from multiple places, both as a
-   footnote reference and as a hyperlink reference.
+   footnote reference ([#label]_) and as a `hyperlink reference`__.
+
+   __ label_
 
 .. [#] This footnote is numbered automatically and anonymously using a
    label of "#" only.
 
-.. [*] Footnotes may also use symbols, specified with a "*" label.
+.. [*] With "latex-footnotes", symbolic footnotes and numbered footnotes
+   are merged, the choice of symbol vs. number is done by LaTeX styling.
 """,
 r"""
 Paragraphs contain text and may contain footnote references (manually
-numbered\footnote{%
-A footnote contains body elements, consistently indented by at
-least 3 spaces.
-
-This is the footnote's second paragraph.
-}, anonymous auto-numbered\footnote{%
+numbered\footnote{\label{footnote-1}%
+A footnote.
+}, anonymous auto-numbered\footnote{\label{footnote-2}%
 This footnote is numbered automatically and anonymously using a
 label of \textquotedbl{}\#\textquotedbl{} only.
-}, labeled auto-numbered\footnote{%
+}, labeled auto-numbered\footnote{\label{label}%
 Footnotes may be numbered, either manually or
 automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
 label so it can be referred to from multiple places, both as a
-footnote reference and as a hyperlink reference.
-}, or symbolic\footnote{%
-Footnotes may also use symbols, specified with a \textquotedbl{}*\textquotedbl{} label.
+footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
+}%
+\refstepcounter{footnote}\footnotetext{\label{label}%
+Footnotes may be numbered, either manually or
+automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
+label so it can be referred to from multiple places, both as a
+footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
+}, or symbolic\footnote{\label{footnote-3}%
+With \textquotedbl{}latex-footnotes\textquotedbl{}, symbolic footnotes and numbered footnotes
+are merged, the choice of symbol vs. number is done by LaTeX styling.
 }).
 """],
-# nested
+# multi-nested footnotes
 ["""\
-It's possible to produce nested footnotes in LaTeX. [#]_
+A footnote [#multi]_
 
-.. [#] It takes some work, though. [#]_
-.. [#] And don't even get me started on how tricky recursive footnotes would be.
+.. [#multi] This is a footnote with nested [#]_ footnotes. [#]_ [#]_
+.. [#] First nested [#]_ footnote. [#]_
+.. [#] Second nested footnote. [#]_
+.. [#] Third nested footnote.
+.. [#] First double-nested footnote.
+.. [#] Second double-nested footnote.
+.. [#] First triple-nested footnote.
+.. [#] Not nested, referenced after footnote text.
+
+Ref to a new footnote [#]_
+
+A second reference to the first one [#multi]_.
+We can also write a hyperlink to multi_.
 """,
 r"""
-It's possible to produce nested footnotes in LaTeX.\footnote{%
-It takes some work, though.\footnotemark{}
-}\footnotetext{%
-And don't even get me started on how tricky recursive footnotes would be.
+A footnote\footnote{\label{multi}%
+This is a footnote with nested\footref{footnote-1} footnotes.\footref{footnote-2}\footref{footnote-3}
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-1}%
+First nested\footref{footnote-4} footnote.\footref{footnote-5}
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-2}%
+Second nested footnote.\footref{footnote-6}
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-3}%
+Third nested footnote.
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-4}%
+First double-nested footnote.
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-5}%
+Second double-nested footnote.
+}%
+\refstepcounter{footnote}\footnotetext{\label{footnote-6}%
+First triple-nested footnote.
 }
-"""],
-# chained
-["""\
-It's possible to produce chained footnotes in LaTeX. [#]_
 
-.. [#] They're just a special case of nested footnotes. [#]_
-.. [#] A nested footnote is a footnote on a footnote. [#]_
-.. [#] This is a footnote on a footnote on a footnote.
-""",
-r"""
-It's possible to produce chained footnotes in LaTeX.\footnote{%
-They're just a special case of nested footnotes.\footnotemark{}
-}\footnotetext{%
-A nested footnote is a footnote on a footnote.\footnotemark{}
-}\footnotetext{%
-This is a footnote on a footnote on a footnote.
+Ref to a new footnote\footnote{\label{footnote-7}%
+Not nested, referenced after footnote text.
 }
-"""],
-# multinested
-["""\
-LaTeX isn't the best at nested footnote support. [#]_
 
-.. [#] Specifically, it gets the numbers wrong [#]_ for "multinested"
-   footnotes. [#]_
-.. [#] For example, this should be footnote 2, but both it and the next one
-   show up as footnote 3.
-.. [#] That's a footnote that contains more than one footnote of its own.
-""",
-r"""
-LaTeX isn't the best at nested footnote support.\footnote{%
-Specifically, it gets the numbers wrong\footnotemark{} for \textquotedbl{}multinested\textquotedbl{}
-footnotes.\footnotemark{}
-}\footnotetext{%
-For example, this should be footnote 2, but both it and the next one
-show up as footnote 3.
-}\footnotetext{%
-That's a footnote that contains more than one footnote of its own.
-}
+A second reference to the first one\footref{multi}.
+We can also write a hyperlink to \hyperref[multi]{multi}.
 """],
 ])
 
