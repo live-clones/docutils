@@ -1010,7 +1010,7 @@ r"""
 Paragraphs contain text and may contain footnote references (manually
 numbered\footnote{\label{footnote-1}%
 A footnote.
-}, anonymous auto-numbered\footnote{\label{footnote-2}%
+}, anonymous auto-numbered\footnote{%
 This footnote is numbered automatically and anonymously using a
 label of \textquotedbl{}\#\textquotedbl{} only.
 }, labeled auto-numbered\footnote{\label{label}%
@@ -1018,7 +1018,7 @@ Footnotes may be numbered, either manually or
 automatically using a \textquotedbl{}\#\textquotedbl{}-prefixed label.  This footnote has a
 label so it can be referred to from multiple places, both as a
 footnote reference (\footref{label}) and as a \hyperref[label]{hyperlink reference}.
-}, or symbolic\footnote{\label{footnote-3}%
+}, or symbolic\footnote{%
 With \textquotedbl{}latex-footnotes\textquotedbl{}, symbolic footnotes and numbered footnotes
 are merged, the choice of symbol vs. number is done by LaTeX styling.
 }).
@@ -1064,7 +1064,7 @@ Second double-nested footnote.
 First triple-nested footnote.
 }
 
-Ref to a new footnote\footnote{\label{footnote-7}%
+Ref to a new footnote\footnote{%
 Not nested, referenced after footnote text.
 }
 
