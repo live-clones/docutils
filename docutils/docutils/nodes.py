@@ -118,9 +118,7 @@ class Node:
 
     def asdom(self,
               dom: ModuleType | None = None,
-              ) -> minidom.Document | minidom.Element | minidom.Text:
-        # TODO: minidom.Document is only returned by document.asdom()
-        # (which overwrites this base-class implementation)
+              ) -> minidom.Element | minidom.Text:
         """Return a DOM **fragment** representation of this Node."""
         if dom is None:
             import xml.dom.minidom as dom

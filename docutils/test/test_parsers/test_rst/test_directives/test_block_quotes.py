@@ -64,7 +64,7 @@ generic_tests = [
             Another Attribution,
             Second Line
 """],
-# TODO: Add class option.
+# TODO: Add class option to epigraph, highlights, and pull-quote directives.
 ["""\
 .. %(type)s::
 """,

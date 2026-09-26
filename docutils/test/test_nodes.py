@@ -1321,7 +1321,7 @@ class AttributeTypeTests(unittest.TestCase):
 
     def test_validate_yesorno(self):
         # False if '0', else bool
-        # TODO: The docs say '0' is false:
+        # The docs say '0' is false, TODO:
         # * Also return `True` for values that evaluate to `False`?
         #   Even for `False` and `None`?
         # * Also return `False` for 'false', 'off', 'no'

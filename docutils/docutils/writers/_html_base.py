@@ -1571,7 +1571,7 @@ class HTMLTranslator(writers.DoctreeTranslator):
         self.section_level -= 1
         self.body.append('</div>\n')
 
-    # TODO: use the new HTML5 element <aside>
+    # TODO: use <aside> here with exception in  html4css1
     def visit_sidebar(self, node) -> None:
         self.body.append(
             self.starttag(node, 'div', CLASS='sidebar'))

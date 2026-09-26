@@ -64,8 +64,9 @@ Public Domain Dedication`. [#]_)
    Public Domain Dedication CC0_ (CC zero, "No Rights Reserved"). So does
    the Free Software Foundation in its license-list_.
 
-   __  http://creativecommons.org/retiredlicenses
-   .. _CC0: http://creativecommons.org/about/cc0
+   __  https://creativecommons.org/retiredlicenses
+   .. _CC0: https://creativecommons.org/publicdomain/zero/
+
 
 Exceptions
 ==========

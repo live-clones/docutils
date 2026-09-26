@@ -181,7 +181,6 @@ totest['images'] = [
 <document source="test data">
     <image height="100em" uri="picture.png" width="200Q">
 """],
-# TODO: support CSS3 units (cf. [feature-requests:#57]
 ["""\
 .. image:: picture.png
    :width: 50%
