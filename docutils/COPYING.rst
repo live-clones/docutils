@@ -102,23 +102,45 @@ The exceptions to the `Public Domain Dedication`_ above are:
 
   .. _eLyXer: https://github.com/alexfernandez/elyxer
 
+* docutils/writers/_html_base.py
+
+  Copyright © 2016 David Goodger, Günter Milde
+  Released under the terms of the `BSD 2-Clause License`_
+  (`local copy <licenses/BSD-2-Clause.rst>`__).
+
 * | docutils/__main__.py,
   | docutils/parsers/commonmark_wrapper.py,
+  | docutils/parsers/docutils_xml.py,
+  | docutils/parsers/rst/include/html-roles.txt,
   | docutils/utils/math/__init__.py,
-  | docutils/utils/math/latex2mathml.py,
+  | docutils/utils/math/mathalphabet2unichar.py,
+  | docutils/utils/math/mathml_elements.py,
   | docutils/utils/math/tex2mathml_extern.py,
   | docutils/utils/punctuation_chars.py,
-  | docutils/utils/smartquotes.py,
   | docutils/writers/html5_polyglot/__init__.py,
   | docutils/writers/html5_polyglot/\*.css,
   | docutils/writers/latex2e/docutils.sty,
   | docutils/writers/xetex/__init__.py,
+  | test/test_CLI.py,
+  | test/test_parsers/test_docutils_xml/test_parse_element.py,
+  | test/test_parsers/test_docutils_xml/test_misc.py,
+  | test/test_parsers/test_docutils_xml/test_parse.py,
   | test/test_parsers/test_rst/test_directives/test__init__.py,
   | test/test_parsers/test_rst/test_directives/test_code_parsing.py,
   | test/test_parsers/test_rst/test_line_length_limit_default.py,
   | test/test_parsers/test_rst/test_line_length_limit.py,
+  | test/test_parsers/test_rst/test_root_prefix.py,
+  | test/test_parsers/test_rst/test_source_line.py,
+  | test/test_transforms/test_filter_messages.py,
+  | test/test_transforms/test_smartquotes.py,
+  | test/test_utils/test_math/test__init__.py,
+  | test/test_utils/test_math/test_mathml_elements.py,
+  | test/test_utils/test_math/test_tex2mathml_extern.py,
+  | test/test_writers/print_samples.py,
   | test/test_writers/test_latex2e_misc.py,
-  | test/transforms/test_smartquotes.py,
+  | test/test_writers/test_latex2e_parts.py,
+  | test/test_writers/test_xetex_misc.py,
+  | tools/dev/generate_punctuation_chars.py,
   | tools/docutils-cli.py,
   | tools/rst2html5.py
 
@@ -130,9 +152,7 @@ The exceptions to the `Public Domain Dedication`_ above are:
 
   copyright by Free Software Foundation, Inc.,
   released under the `GNU General Public License`_ version 3 or later
-  (`local copy`__).
-
-  __ licenses/gpl-3-0.rst
+  (`local copy <licenses/gpl-3-0.rst>`__).
 
 All used licenses are OSI-approved_ and GPL-compatible_.
 
