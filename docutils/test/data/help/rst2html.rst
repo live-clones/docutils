@@ -114,6 +114,10 @@ reStructuredText Parser Options
                         Remove spaces before footnote references.
 --leave-footnote-reference-space
                         Leave spaces before footnote references.
+--legacy-figure-align   Make the "figure" directive's "align" option an alias
+                        to "figalign" (default).
+--figure-image-align    Pass the "figure" directive's "align" option to the
+                        included image.
 --syntax-highlight=<format>
                         Token name set for parsing code with Pygments: one of
                         "long", "short", or "none" (no parsing).

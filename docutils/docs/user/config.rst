@@ -892,6 +892,16 @@ especially suited for languages that do not use whitespace to separate words
 :Default: False.
 :Options: ``--character-level-inline-markup``, ``--word-level-inline-markup``.
 
+legacy_figure_align
+~~~~~~~~~~~~~~~~~~~
+Make the `"figure"`_ directive's "align" option an alias to "figalign"
+(i.e. use it to set the figure alignment as in Docutils < 1.0).
+
+:Default: True (will change to False in Docutils 2.0).
+:Options: ``--legacy-figure-align``, ``--figure-image-align``.
+
+New in Docutils 1.0
+
 pep_references
 ~~~~~~~~~~~~~~
 Recognize and link to standalone PEP references (like "PEP 258").

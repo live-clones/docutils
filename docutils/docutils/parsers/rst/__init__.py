@@ -117,6 +117,15 @@ class Parser(docutils.parsers.Parser):
          ('Leave spaces before footnote references.',
           ['--leave-footnote-reference-space'],
           {'dest': 'trim_footnote_reference_space', 'action': 'store_false'}),
+         ('Make the "figure" directive\'s "align" option an alias'
+          ' to "figalign" (default).',
+          ['--legacy-figure-align'],
+          {'action': 'store_true', 'default': True,
+           'validator': frontend.validate_boolean}),
+         ('Pass the "figure" directive\'s "align" option to the '
+          ' included image.',
+          ['--figure-image-align'],
+          {'dest': 'trim_footnote_reference_space', 'action': 'store_false'}),
          ('Token name set for parsing code with Pygments: one of '
           '"long", "short", or "none" (no parsing).  (default: "long")',
           ['--syntax-highlight'],

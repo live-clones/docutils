@@ -19,7 +19,7 @@ specified as pixel values.
 
 .. figure:: ../../../docs/user/rst/images/pens.mp4
    :width: 200px
-   :align: center
+   :figalign: center
    :class: controls
    :alt: test video in a figure
 

@@ -83,6 +83,7 @@ Release 1.0b1.dev (unpublished)
 * docutils/parsers/rst/__init__.py
 
   - Update the RFC base URL to the canonical https://www.rfc-editor.org/info/.
+  - New configuration setting "legacy_figure_align".
 
 * docutils/parsers/rst/directives/__init__.py
 
@@ -95,6 +96,9 @@ Release 1.0b1.dev (unpublished)
   - Do not add "name" attribute to `<reference>` elements
     nor set the internal attribute `indirect_reference_name`.
   - Warn if a "figure" directive is missing both caption and legend.
+  - New option "figalign" for the "figure" directive.
+    With legacy_figure_align = False, the "align" option value is
+    passed to the contained image.
 
 * docutils/parsers/rst/directives/misc.py
 

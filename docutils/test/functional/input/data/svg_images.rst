@@ -16,7 +16,7 @@ image in the document, and the viewing agent.
 .. figure:: ../../../docs/user/rst/images/title-scaling.svg
    :width: 40%
    :figwidth: 75%
-   :align: center
+   :figalign: center
 
    Figure with image occupying 40% of the figure width.
 

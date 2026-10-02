@@ -118,17 +118,25 @@ class Figure(Image):
 
     option_spec = Image.option_spec.copy()
 
+    option_spec['align'] = align
+    option_spec['figalign'] = align
     option_spec['figwidth'] = figwidth_value
     option_spec['figclass'] = directives.class_option
     option_spec['figname'] = directives.unchanged
-    option_spec['align'] = align
     has_content = True
 
     def run(self):
         figwidth = self.options.pop('figwidth', None)
         figclasses = self.options.pop('figclass', None)
         figname = self.options.pop('figname', None)
-        align = self.options.pop('align', None)
+        figalign = self.options.pop('figalign', None)
+        if getattr(self.state.document.settings, 'legacy_figure_align', True):
+            align = self.options.pop('align', None)
+            if align and figalign and align != figalign:
+                msg = self.reporter.warning(
+                    'Option "align" overridden by "figalign"',
+                    line=self.lineno)
+            figalign = figalign or align
         (image_node,) = Image.run(self)
         if isinstance(image_node, nodes.system_message):
             return [image_node]
@@ -153,8 +161,8 @@ class Figure(Image):
         if figname:
             figure_node['names'].append(nodes.fully_normalize_name(figname))
             self.state.document.note_explicit_target(figure_node, figure_node)
-        if align:
-            figure_node['align'] = align
+        if figalign:
+            figure_node['align'] = figalign
         if not self.content:
             msg = self.reporter.warning('Figure without caption and legend.',
                                         line=self.lineno)

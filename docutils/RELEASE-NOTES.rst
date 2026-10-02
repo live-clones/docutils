@@ -64,8 +64,8 @@ Document Tree / Docutils DTD
 Parsers
 -------
 
-* The `legacy_ids`_ configuration setting default will change to False
-  in Docutils 2.0
+* The `legacy_ids`_ and `legacy_figure_align`_ configuration setting
+  defaults will change to False in Docutils 2.0.
 
 Writers
 -------
@@ -210,6 +210,7 @@ Configuration changes:
   - The rfc_base_url_ setting now defaults to
     "https://www.rfc-editor.org/info/".
   - Rename command line option ``--matching-ids`` to ``--lazy-ids``.
+  - New setting `legacy_figure_align`_.
   - If the environment variable `SOURCE_DATE_EPOCH`_ is set, a datestamp_
     will use its value instead of the current time.
 
@@ -224,6 +225,9 @@ standalone reader:
 
 rST parser:
   - Warn if a `"figure"`_ directive is missing both caption and legend.
+  - New option "figalign" for the `"figure"`_ directive.
+    With legacy_figure_align_ = False, the "align" option value is
+    passed to the contained image.
   - "lazy IDs": Generate target ids_ in transforms -- after parsing and
     only if required in the output document.
     Keep behaviour backwards compatible with the legacy_ids_ setting.
@@ -1655,6 +1659,7 @@ Release 0.3.5 (2004-07-29)
 .. _latex_footnotes: docs/user/config.html#latex-footnotes
 .. _legacy_class_functions: docs/user/config.html#legacy-class-functions
 .. _legacy_column_widths: docs/user/config.html#legacy-column-widths
+.. _legacy_figure_align: docs/user/config.html#legacy-figure-align
 .. _legacy_ids: docs/user/config.html#legacy-ids
 .. _literal_block_env: docs/user/config.html#literal-block-env
 .. _math_output: docs/user/config.html#math-output

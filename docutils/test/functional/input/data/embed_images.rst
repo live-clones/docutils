@@ -8,7 +8,7 @@ as a `data URI`_.
 
 .. figure:: ../../../docs/user/rst/images/biohazard.png
    :alt: biohazard
-   :align: left
+   :figalign: left
    :width: 2em
    :figwidth: 45%
    :class: align-center
@@ -17,7 +17,7 @@ as a `data URI`_.
 
 .. figure:: ../../../docs/user/rst/images/biohazard-scaling.svg
    :alt: biohazard
-   :align: right
+   :figalign: right
    :width: 2em
    :figwidth: 45%
    :class: align-center

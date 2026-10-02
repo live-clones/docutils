@@ -547,7 +547,7 @@ A left-aligned figure, 70% wide:
    :figclass: figclass1 figclass2
    :class: class1 class2
    :alt: reStructuredText, the markup syntax
-   :align: left
+   :figalign: left
    :width: 40 px
    :figwidth: 70 %
 
@@ -568,7 +568,7 @@ rendering software used.
 A centred figure, 40% wide:
 
 .. figure:: ../../../docs/user/rst/images/biohazard.png
-   :align: center
+   :figalign: center
    :width: 40 px
    :figwidth: 40%
 
@@ -586,7 +586,7 @@ rendering software used.
 A right-aligned figure:
 
 .. figure:: ../../../docs/user/rst/images/biohazard.png
-   :align: right
+   :figalign: right
    :width: 40 px
 
    This is the caption.

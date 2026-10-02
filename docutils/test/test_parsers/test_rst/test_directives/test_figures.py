@@ -29,10 +29,13 @@ class ParserTestCase(unittest.TestCase):
         parser = Parser()
         settings = get_default_settings(Parser)
         settings.warning_stream = ''
-        for name, cases in totest.items():
+        for name, (settings_overrides, cases) in totest.items():
+            settings = settings.copy()
+            for k, v in settings_overrides.items():
+                setattr(settings, k, v)
             for casenum, (case_input, case_expected) in enumerate(cases):
                 with self.subTest(id=f'totest[{name!r}][{casenum}]'):
-                    document = new_document('test data', settings.copy())
+                    document = new_document('test data', settings)
                     parser.parse(case_input, document)
                     output = document.pformat()
                     self.assertEqual(case_expected, output)
@@ -40,7 +43,7 @@ class ParserTestCase(unittest.TestCase):
 
 totest = {}
 
-totest['figures'] = [
+totest['figures'] = ({}, [
 # Note: A figure with no caption nor legend is not valid according to the DTD.
 ["""\
 .. figure:: picture.png
@@ -170,38 +173,6 @@ totest['figures'] = [
         <image alt="alternate text" classes="image-class" height="100" ids="img-picture" loading="lazy" names="img:picture" scale="50" uri="picture.png" width="200">
         <caption>
             A figure with options and this caption.
-"""],
-["""\
-.. figure:: picture.png
-   :align: center
-
-   A figure with explicit alignment.
-""",
-"""\
-<document source="test data">
-    <figure align="center">
-        <image uri="picture.png">
-        <caption>
-            A figure with explicit alignment.
-"""],
-["""\
-.. figure:: picture.png
-   :align: top
-
-   A figure with wrong alignment.
-""",
-"""\
-<document source="test data">
-    <system_message level="3" line="1" source="test data" type="ERROR">
-        <paragraph>
-            Error in "figure" directive:
-            invalid option value: (option: "align"; value: 'top')
-            "top" unknown; choose from "left", "center", or "right".
-        <literal_block xml:space="preserve">
-            .. figure:: picture.png
-               :align: top
-            \n\
-               A figure with wrong alignment.
 """],
 ["""\
 .. figure:: picture.png
@@ -355,7 +326,105 @@ Testing for line-leaks:
         <paragraph>
             Try the "image" directive (or cheat with an empty comment).
 """],
-]
+])
+
+totest['align'] = ({'legacy_figure_align': False}, [
+["""\
+.. figure:: picture.png
+   :align: center
+   :figalign: right
+
+   Aligned figure with explicit alignment of the included image.
+""",
+"""\
+<document source="test data">
+    <figure align="right">
+        <image align="center" uri="picture.png">
+        <caption>
+            Aligned figure with explicit alignment of the included image.
+"""],
+["""\
+.. figure:: picture.png
+   :align: top
+
+   A figure with wrong alignment.
+""",
+"""\
+<document source="test data">
+    <system_message level="3" line="1" source="test data" type="ERROR">
+        <paragraph>
+            Error in "figure" directive:
+            invalid option value: (option: "align"; value: 'top')
+            "top" unknown; choose from "left", "center", or "right".
+        <literal_block xml:space="preserve">
+            .. figure:: picture.png
+               :align: top
+            \n\
+               A figure with wrong alignment.
+"""],
+])
+
+totest['legacy align'] = ({'legacy_figure_align': True}, [
+["""\
+.. figure:: picture.png
+   :figalign: center
+
+   A figure with explicit alignment.
+""",
+"""\
+<document source="test data">
+    <figure align="center">
+        <image uri="picture.png">
+        <caption>
+            A figure with explicit alignment.
+"""],
+["""\
+.. figure:: picture.png
+   :align: center
+
+   A figure with legacy alignment option.
+""",
+"""\
+<document source="test data">
+    <figure align="center">
+        <image uri="picture.png">
+        <caption>
+            A figure with legacy alignment option.
+"""],
+["""\
+.. figure:: picture.png
+   :figalign: right
+   :align: left
+
+   "figalign" overrides legacy "align"
+""",
+"""\
+<document source="test data">
+    <figure align="right">
+        <image uri="picture.png">
+        <caption>
+            "figalign" overrides legacy "align"
+"""],
+["""\
+.. figure:: picture.png
+   :align: top
+
+   A figure with wrong alignment.
+""",
+"""\
+<document source="test data">
+    <system_message level="3" line="1" source="test data" type="ERROR">
+        <paragraph>
+            Error in "figure" directive:
+            invalid option value: (option: "align"; value: 'top')
+            "top" unknown; choose from "left", "center", or "right".
+        <literal_block xml:space="preserve">
+            .. figure:: picture.png
+               :align: top
+            \n\
+               A figure with wrong alignment.
+"""],
+])
 
 
 if __name__ == '__main__':

@@ -384,14 +384,17 @@ legend.  To specify an image without a caption, use an empty comment
 
 The "figure" directive supports the `common options`_ and all
 `options of the "image" directive <image options_>`__.
-These options (except ``align``) are passed on to the contained image.
+These options are passed on to the contained image with one exception:
+if the configuration setting legacy_figure_align_ is True, the ``align``
+option is a backwards compatibility alias for ``figalign``.
 
-``align`` : "left", "center", or "right"
+In addition, the following options are recognized:
+
+``figalign`` : "left", "center", or "right"
     The horizontal alignment of the figure.  The specific behaviour
     depends upon the browser or rendering software used. In HTML, the
     values "left" and "right" allow text to flow around the figure.
-
-In addition, the following options are recognized:
+    New in Docutils 1.0.
 
 ``figclass`` : space separated list of `class names`_
     Set a `classes attribute`_ value on the <figure> element
@@ -2390,6 +2393,7 @@ Common Option Value Types
 .. _generator: ../../user/config.html#generator
 .. _image_loading: ../../user/config.html#image-loading
 .. _input_encoding: ../../user/config.html#input-encoding
+.. _legacy_figure_align: ../../user/config.html#legacy-figure-align
 .. _math_output: ../../user/config.html#math-output
 .. _"parser" configuration setting: ../../user/config.html#parser
 .. _raw_enabled: ../../user/config.html#raw-enabled
